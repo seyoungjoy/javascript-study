@@ -1,18 +1,18 @@
-# 04장 변수
-## 4.1 변수란 무엇인가? 왜 필요한가? 
+# 4.1 변수란 무엇인가? 왜 필요한가? 
 ### 컴퓨터는 CPU를 사용해 연산하고, 메모리를 사용해 데이터를 기억한다.
 
 컴퓨터의 메모리는 메모리 셀의 집합이며 메모리 셀은 각 8bit (1byte)이고, 컴퓨터는 메모리 셀 단위인 1byte로 데이터를 저장하거나 읽어들인다.
 
 <p align='center'>
-<img src='https://s3.us-west-2.amazonaws.com/secure.notion-static.com/a26aee94-71e8-4082-a453-d9a55121a597/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20220310%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20220310T020211Z&X-Amz-Expires=86400&X-Amz-Signature=cd0a56396d4d17c713cf0ab32e124ebd26450d2e99c3555acc58fc8fd97f08fa&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22Untitled.png%22&x-id=GetObject' width='200px'></p>
+<img src='https://s3.us-west-2.amazonaws.com/secure.notion-static.com/a26aee94-71e8-4082-a453-d9a55121a597/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20220312%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20220312T122820Z&X-Amz-Expires=86400&X-Amz-Signature=05c6e0cd0da99eaf4edff07f1ff3f24af5f9722a9d212a8b8f316564a0bf3986&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22Untitled.png%22&x-id=GetObject' width='200px'></p>
+
 
 ### 그렇다면 자바스크립트에서 10 + 20 을 수행하면 어떻게 될까?
 
 컴퓨터는 10과 20이라는 값을 임의의 메모리 주소에 할당하고 CPU는 이 값을 읽어 + 연산자를 통해 30이라는 결과 값을 다시 임의의 메모리 주소에 저장한다.
 
 <p align='center'>
-<img src='https://s3.us-west-2.amazonaws.com/secure.notion-static.com/31a8fefc-6859-4268-a5b1-97b3e92a7340/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20220310%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20220310T124521Z&X-Amz-Expires=86400&X-Amz-Signature=005f64a73becbaf3670b727841927a2fa19e5bf3c24a9cc481021b8fa41ef544&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22Untitled.png%22&x-id=GetObject' width='500px'>
+<img src='https://s3.us-west-2.amazonaws.com/secure.notion-static.com/31a8fefc-6859-4268-a5b1-97b3e92a7340/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20220312%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20220312T122911Z&X-Amz-Expires=86400&X-Amz-Signature=b9471143f5333410e8519e53b8295a17c52de65b6ff2967e1bd9dec50b128777&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22Untitled.png%22&x-id=GetObject' width='500px'>
 </p>
 
 하지만 지금 상황에서는 결과 값 30을 사용하기 위해서는 30이 저장된 메모리 주소값을 알아내 직접 접근하여 가져올수 밖에 없다.
@@ -87,7 +87,7 @@ e.g.) `var` 키워드를 만나면 뒤에 오는 변수 이름으로 새로운 �
 var score; // 변수 선언
 ```
 <p align='center'>
-<img src='https://s3.us-west-2.amazonaws.com/secure.notion-static.com/f92955c3-0249-4a3b-b7e0-f54db71a36ff/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20220310%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20220310T140036Z&X-Amz-Expires=86400&X-Amz-Signature=e193534a6292e9dfc45ed7377b8b5d55520ccae117f1c8b57cf16035359ece83&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22Untitled.png%22&x-id=GetObject' width='350px'>
+<img src='https://s3.us-west-2.amazonaws.com/secure.notion-static.com/f92955c3-0249-4a3b-b7e0-f54db71a36ff/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20220312%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20220312T122937Z&X-Amz-Expires=86400&X-Amz-Signature=d3cebca2be66b1f1d844a96a31361cf9192bdd32068c51aaa09dcc9155465325&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22Untitled.png%22&x-id=GetObject' width='350px'>
 </p>
 변수에 선언만 했을 뿐 할당은 하지 않았다. 이때 확보된 메모리 공간은 비어있는게 아니라 `undefined`라는 값이 암묵적으로 할당되어 초기화 된다.
 
