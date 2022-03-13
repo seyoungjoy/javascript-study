@@ -84,7 +84,7 @@ var z = y + 2; // y가 숫자 값으로 평가되므로 + 연산자의 좌항에
 문은 여러 토큰으로 구성되며 토큰은 문법적으로 더 이상 나눌 수 없는 코드의 기본를 의미한다.
 
 <p align='center'>
-<img src='https://s3.us-west-2.amazonaws.com/secure.notion-static.com/4cb7b724-cbe4-47ce-a05f-6610a67b0186/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20220312%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20220312T122704Z&X-Amz-Expires=86400&X-Amz-Signature=b967f17f800603d0732022daae408fca76b33714fb61fb4ab543fd0ef9919f8c&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22Untitled.png%22&x-id=GetObject'>
+<img src='https://bl3302files.storage.live.com/y4mhxaz1Pq2EeVDGGyn25xeh5R8TkCiOpKIaD4c2cVMRc00HUcUrpXshuEduUAyGB3sUgJOCnYMoAAhEMMWnAjzWWRiDJE_WRs5Pil28JO3zz0a-DQr_9hjlQ4e8PqVuOrOkYTMfTW2weSijOZuUXRYkeO1lTE-T7leewXRJ6VPLzhfcIOEKTaeitMhqY5K6aPx?width=364&height=146&cropmode=none'>
 </p>
 
 키워드, 식별자, 연산자, 리터럴, 세미콜론 등이 토큰에 해당된다.
