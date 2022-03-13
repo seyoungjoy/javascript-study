@@ -3,8 +3,7 @@
 
 컴퓨터의 메모리는 메모리 셀의 집합이며 메모리 셀은 각 8bit (1byte)이고, 컴퓨터는 메모리 셀 단위인 1byte로 데이터를 저장하거나 읽어들인다.
 
-<p align='center'>
-<img src='https://s3.us-west-2.amazonaws.com/secure.notion-static.com/a26aee94-71e8-4082-a453-d9a55121a597/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20220312%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20220312T122820Z&X-Amz-Expires=86400&X-Amz-Signature=05c6e0cd0da99eaf4edff07f1ff3f24af5f9722a9d212a8b8f316564a0bf3986&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22Untitled.png%22&x-id=GetObject' width='200px'></p>
+<p align='center'><img src='https://bl3302files.storage.live.com/y4mau5oKSOM-5-XQEoR3W3sG53ZK43FpdTj96YufR0u1qk3u5ScE_CnxLn6seLR09JRBP0UZDf6tbB-mHej1UMt6FcRqaFDg1dMWgzlbGFV2AjDnogJ2XrT_sTZnx5GfjqQHbIuXywHXCTwrjyk-81azP4quuhKOAMzA3IdgDay3OLVhd9rvjb8sL3qhanr3zbp?width=598&height=385&cropmode=none' width='250px'></p>
 
 
 ### 그렇다면 자바스크립트에서 10 + 20 을 수행하면 어떻게 될까?
@@ -12,7 +11,7 @@
 컴퓨터는 10과 20이라는 값을 임의의 메모리 주소에 할당하고 CPU는 이 값을 읽어 + 연산자를 통해 30이라는 결과 값을 다시 임의의 메모리 주소에 저장한다.
 
 <p align='center'>
-<img src='https://s3.us-west-2.amazonaws.com/secure.notion-static.com/31a8fefc-6859-4268-a5b1-97b3e92a7340/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20220312%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20220312T122911Z&X-Amz-Expires=86400&X-Amz-Signature=b9471143f5333410e8519e53b8295a17c52de65b6ff2967e1bd9dec50b128777&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22Untitled.png%22&x-id=GetObject' width='500px'>
+<img src='https://bl3302files.storage.live.com/y4mbjZdPqfy3jwJ7R8mf458Le7HdiD8FuBeoT2tVGaSMul8gXfUAqCkG9-FxjxC4FQCUwbBz39Rqw1QJmWMzge6iXg1-0UIhstPVs9qD23DWX429UKpetFrT-ftFrScASrq_T5W0Li6LlPSixunW8ZMK7YD-qlngG52U12GlXxy1QF_KgJ-RJKtOGsteXnDBOYU?width=1558&height=596&cropmode=none' width='500px'>
 </p>
 
 하지만 지금 상황에서는 결과 값 30을 사용하기 위해서는 30이 저장된 메모리 주소값을 알아내 직접 접근하여 가져올수 밖에 없다.
@@ -87,7 +86,7 @@ e.g.) `var` 키워드를 만나면 뒤에 오는 변수 이름으로 새로운 �
 var score; // 변수 선언
 ```
 <p align='center'>
-<img src='https://s3.us-west-2.amazonaws.com/secure.notion-static.com/f92955c3-0249-4a3b-b7e0-f54db71a36ff/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20220312%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20220312T122937Z&X-Amz-Expires=86400&X-Amz-Signature=d3cebca2be66b1f1d844a96a31361cf9192bdd32068c51aaa09dcc9155465325&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22Untitled.png%22&x-id=GetObject' width='350px'>
+<img src='https://bl3302files.storage.live.com/y4mvyRxsP0TzR0SGfniIL0eerqmSATI1SzaVWxAMcskEI2VDmwieg6gLvOa-izj8-8J6KhhcP8YiNKTZ2bRjR_4I2WSukWPG1iZYsNOVF6gQn6WGvlrYjHUGqn3bC4Likosg_MFRXcHvHjPk8O6IziVXeqgBsCDFSFkSgFb6g-i5SMmP8T-QM7e3luZZJ3CLrkl?width=788&height=338&cropmode=none' width='500px'>
 </p>
 변수에 선언만 했을 뿐 할당은 하지 않았다. 이때 확보된 메모리 공간은 비어있는게 아니라 `undefined`라는 값이 암묵적으로 할당되어 초기화 된다.
 
@@ -168,7 +167,7 @@ score = 90; // 재할당
 
 이 때 80이 저장되어 있던 메모리 공간을 지우고 그 메모리 공간에 재할당 값 90을 새롭게 저장하는 것이 아니라 새로운 메모리 공간을 확보하고 그 메모리 공간에 값을 저장한다.
 <p align='center'>
-<img src='https://s3.us-west-2.amazonaws.com/secure.notion-static.com/8278b772-4f13-492d-a05f-ac8949a978e7/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20220311%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20220311T120240Z&X-Amz-Expires=86400&X-Amz-Signature=27bc6e204a869c2602d4cdc236cb1b5a9016d70face02d63483fba62a39a68e0&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22Untitled.png%22&x-id=GetObject'>
+<img src='https://bl3302files.storage.live.com/y4m0ASSyAW0DaoAEuhoYtr2AfNvhYNI4RHD0sqoxbEi0bcO3Ng5xZ9WxNDqAf1xjPW_G2EKfEeRqoEw-kvpRsNmedSopdgeFxVUHs5FivN-xcPWTL24Z62MT_2CLQz1zmbwijPqTNmFZngCtDl4PmD8ZRprrKlZfxIAIw1YT6NfafYdEUC7QgkkGUmAe8TRvONC?width=1840&height=702&cropmode=none'>
 </p>
 재할당 후 음영처리된 부분은 어떤 식별자와도 연결되어 있지 않다. 이러한 불필요한 값들은 가비지 콜렉터에 의해 메모리에서 자동해제된다.
 
