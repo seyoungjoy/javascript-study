@@ -16,35 +16,23 @@
 - var 키워드로 선언한 변수의 중복 선언
 
 ```jsx
-
 // var 키워드로 선언된 변수는 같은 스코프 내에서 중복 선언이 허용됨.
-
 // 의도치 않게 변수값이 재할당되어 변경되는 부작용을 발생시킨다.
 
 function foo(){
-
-var x = 1;
-
-var x = 2;
-
-console.log(x);
-
+    var x = 1;
+    var x = 2;
+    console.log(x);
 }
 
 foo();
 
 //let,const 키워드로 선언된 변수는 중복 선언을 허용하지 않는다.
-
 function bar(){
-
-let x = 1;
-
-let x = 2;
-
-console.log(x);
-
-//Uncaught SyntaxError: Identifier 'x' has already been declared
-
+    let x = 1;
+    let x = 2;
+    console.log(x);
+    //Uncaught SyntaxError: Identifier 'x' has already been declared
 }
 
 ```
@@ -66,43 +54,25 @@ console.log(x);
 - 지역 변수는 자신의 지역 스코프와 하위 지역 스코프에서 유효하다.
 
 ```jsx
-
 var x = 'global x';
-
 var y = 'global y';
-
 function outer(){
-
-var z = "outer's local z";
-
-console.log(x); //global x
-
-console.log(y); //global y
-
-console.log(z); //outer's local z
-
-function inner(){
-
-var x = "inner's local x";
-
-console.log(x); //inner's local x
-
-console.log(y); //global y
-
-console.log(z); //outer's local z
-
+    var z = "outer's local z";
+    console.log(x); //global x
+    console.log(y); //global y
+    console.log(z); //outer's local z
+    function inner(){
+        var x = "inner's local x";
+        console.log(x); //inner's local x
+        console.log(y); //global y
+        console.log(z); //outer's local z
+    }
+    inner();
 }
-
-inner();
-
-}
-
 outer();
 
 console.log(x); //global x
-
 console.log(y); //global y
-
 console.log(z); //ReferenceError: z is not defined
 
 ```
@@ -133,27 +103,18 @@ console.log(z); //ReferenceError: z is not defined
 - 식별자를 검색하는 규칙이라고 표현하는 편이 좀더 적합하다.
 
 ```jsx
-
 //전역 함수
-
 function foo(){
-
-console.log('global function foo');
-
+    console.log('global function foo');
 }
 
 function bar(){
-
+    
 //중첩 함수
-
 function foo(){
-
-console.log('local function foo');
-
+    console.log('local function foo');
 }
-
 foo();
-
 }
 
 bar();
@@ -171,25 +132,18 @@ bar();
 함수의 코드 블록만을 지역 스코프로 인정하는 것. (var 키워드로 선언된 변수)
 
 ```jsx
-
 var x =1;
 
 if(true){
-
-var x =10;
-
+    var x =10;
 }
-
 console.log(x); //10
 
 var i =10;
 
 for(var i=0; i<5; i++){
-
-console.log(i);
-
+    console.log(i);
 }
-
 console.log(i);//5
 
 ```
@@ -197,25 +151,17 @@ console.log(i);//5
  ## 13.5 렉시컬 스코프 
 
 ```jsx
-
 var x = 1;
 
 function foo(){
-
-var x=10;
-
-bar();
-
+    var x=10;
+    bar();
 }
-
 function bar(){
-
-console.log(x);
-
+    console.log(x);
 }
 
 foo();//?
-
 bar();//?
 
 ```
