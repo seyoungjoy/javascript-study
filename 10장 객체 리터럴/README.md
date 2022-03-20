@@ -3,8 +3,7 @@
 - 원시 타입의 값은 변경 불가능한 값이지만,<br>
   객체 타입의 값, 즉 객체는 변경 가능한 값이다.
 - 객체는 프로퍼티와 메서드로 구성된 집합체  
-
-![Untitled](https://user-images.githubusercontent.com/85421850/158594129-98144483-dec6-464e-9e13-5ac08695c353.png)
+<p align="center"><img src="https://user-images.githubusercontent.com/85421850/158594129-98144483-dec6-464e-9e13-5ac08695c353.png" width='500px'/>
 
 #### 프로퍼티
 
