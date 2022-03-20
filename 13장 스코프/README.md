@@ -89,7 +89,7 @@ console.log(z); //ReferenceError: z is not defined
 - 변수를 참조할 때 자바스크립트 엔진은 스코프 체인을 통해 변수를 참조하는 코드의 스코프에서 시작하여 상위 스코프 방향으로 이동하며 선언된 변수를 검색한다.
 - 이를 통해 상위 스코프에서 선언한 변수를 하위 스코프에서도 참조할 수 있다.
 
-![Untitled (1)](https://user-images.githubusercontent.com/85421850/158827917-baf6df45-2285-4ae7-81ba-1adc271839e8.png)
+<p align="center"><img src="https://user-images.githubusercontent.com/85421850/158827917-baf6df45-2285-4ae7-81ba-1adc271839e8.png" width='200px'/>
 
  ### 13.3.1 스코프 체인에 의한 변수 검색 
 
