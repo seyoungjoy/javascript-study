@@ -621,7 +621,8 @@ repeat(5, logOdds);
 <br/><br/><br/>
 
 ------------
-### 세미콜론과 관하여...
+# 세미콜론과 관하여...
+
 함수 선언문과 함수 표현식에 관하여 공부 중 세미콜론을 넣고 안넣고의 차이가 헷갈려서 다시 알아보았다.
 
 단순히 생각해보니 간단했다. 먼저 왜 세미콜론이 필요한지에 대해 생각해보자.  세미콜론은 문의 종료를 알리기위해 사용한다. 문은 최소의 실행 단위이고, 프로그램은 이러한 문들의 집합으로 구성된다.
@@ -629,18 +630,23 @@ repeat(5, logOdds);
 따라서 세미콜론을 삽입하는 것은 문의 종료를 정확히 알려주고, 문이 의도한 바를 정확히 이행할 수 있게 해주므로 중요하다.
 
 그럼 왜 함수 선언문도 **문**인데 왜 세미콜론을 넣어주지 않는것일까?
-```javascript
+
+```jsx
 function why() {
     console.log("no semicolon")
 }
 ```
+
 자바스크립트에서 코드 블록은 0개 이상의 문들로 이루어진 하나의 실행 단위로 그 자체로 종결성을 갖는다. 세미콜론은 문의 **종료** 를 알리기 위해서 사용하는  것인데, 코드 블록은 그 자체로 하나의 실행 단위, 종결 한다는 의미를 가지니 세미콜론을 넣어 줄 이유가 없다.
-따라서 한글로 번역된 함수 선언*문*은 잘못된 표현이다. 함수 선언문은 없다. 함수 선언이라고 불러야 맞는 표현 같다.[ 모질라 재단의 MDN 문서](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Statements/function)에도 함수 선언이라는 말로 번역되어있다.
+따라서 한글로 번역된 함수 선언**문**은 잘못된 표현이다. 함수 선언문은 없다. 함수 선언이라고 불러야 맞는 표현 같다. [**모질라 재단의 MDN 문서**](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Statements/function)에도 함수 선언이라는 말로 번역되어있다.
 
 함수 표현식에는 세미콜론을 삽입해줘야 한다.
-```javascript
+
+```jsx
 var why = function() { console.log("yes semicolon"); };
 ```
-피연산자로 평가된 함수 `function() { console.log("yes semicolon"); }` 가 자체 종결성을 갖더라도, 위의 코드는 변수 `why` 에 값을 할당하는 할당*문* 이기 때문에 세미콜론으로 문을 구별해줘야 하기 때문이다.
+
+피연산자로 평가된 함수 `function() { console.log("yes semicolon"); }` 가 자체 종결성을 갖더라도, 위의 코드는 변수 `why` 에 값을 할당하는 할당**문** 이기 때문에 세미콜론으로 문을 구별해줘야 하기 때문이다.
 
 > 참조: https://www.codecademy.com/forum_questions/507f6dd09266b70200000d7e
+>
