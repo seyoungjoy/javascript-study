@@ -51,8 +51,10 @@ console.log(increaser()); // 1
 
 ```jsx
 function square(number) {
+
 	return number * number;
 }
+
 
 console.log(Object.getOwnPropertyDescriptors(square));
 ```
