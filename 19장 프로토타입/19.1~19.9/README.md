@@ -81,13 +81,13 @@ console.log(circle1.getArea());
 - 모든객체는 하나의 프로토타입을 갖고 생성자 함수와 열결되어 있다.
 <p align="center"><img src="https://user-images.githubusercontent.com/85421850/160229051-2697b272-becf-4bab-9d68-321fc614b017.png" width='60%'/>
 
-- **proto** 접근자 프로퍼티를 통해 자신의 프로토타입에 간접적으로 접근할 수 있다.
+- `__proto__` 접근자 프로퍼티를 통해 자신의 프로토타입에 간접적으로 접근할 수 있다.
 - 프로토타입은 자신의 constructor 프로퍼티를 통해 생성자 함수에 접근할 수 있고
 - 생성자 함수는 자신의 prototype 프로퍼티를 통해 프로토타입에 접근할 수 있다.
 
-## 19.3.1 **proto** 접근자 프로퍼티
+## 19.3.1 `__proto__` 접근자 프로퍼티
 
-- 모든 객체는 **proto** 접근자 프로퍼티를 통해 자신의 프로토타입에 간접적으로 접근할 수 있다.
+- 모든 객체는 `__proto__` 접근자 프로퍼티를 통해 자신의 프로토타입에 간접적으로 접근할 수 있다.
 
 ```jsx
 const person = { name: 'Lee' };
@@ -98,11 +98,11 @@ console.log(person.__proto__);
 
 <p align="center"><img src="https://user-images.githubusercontent.com/85421850/160229065-fec15272-7f8b-4be1-8d5e-72e03081f6e7.png" width='50%'/>
 
-- **proto** 는 접근자 프로퍼티다.
+- `__proto__` 는 접근자 프로퍼티다.
 
 자체적으로 값[[Value]]를 갖지 않고 다른 데이터 프로퍼티의 값을 읽거나 저장할 때 사용하는 접근자 함수, 즉 [[Get]], [[Set]] 프로퍼티 어트리뷰트로 구성된 프로퍼티다.
 
-**proto** 접근자 프로퍼티를 통해 프로토타입에 접근하면 내부적으로 **proto** 접근자 프로처티의 getter함수인 get **proto** 가 호출된다.
+`__proto__` 접근자 프로퍼티를 통해 프로토타입에 접근하면 내부적으로 `__proto__` 접근자 프로처티의 getter함수인 get `__proto__` 가 호출된다.
 
 ```jsx
 console.log(Object.getOwnPropertyDescriptor(Object.prototype, '__proto__'));
@@ -115,11 +115,11 @@ console.log(Object.getOwnPropertyDescriptor(Object.prototype, '__proto__'));
 //[[Prototype]]: Object
 ```
 
-- **proto** 접근자 프로퍼티는 상속을 통해 사용된다.
+- `__proto__` 접근자 프로퍼티는 상속을 통해 사용된다.
 
-**proto** 접근자 프로퍼티는 객체 자체가 소유하고 있는게 아님.
+`__proto__` 접근자 프로퍼티는 객체 자체가 소유하고 있는게 아님.
 
-모든 객체의 부모인 Object.prototype에 있는 Object.prototype.**proto** 이 접근자 프로퍼티를 상속받아서 사용할 수 있는 것이다.
+모든 객체의 부모인 Object.prototype에 있는 Object.prototype.`__proto__` 이 접근자 프로퍼티를 상속받아서 사용할 수 있는 것이다.
 
 ```jsx
 const person = { name: 'Lee' };
@@ -128,7 +128,7 @@ console.log(person.hasOwnProperty('__proto__')); //false
 console.log(person.__proto__ === Object.prototype); //true
 ```
 
-- **proto** 접근자 프로퍼티를 통해 프로토타입에 접근하는 이유
+- `__proto__` 접근자 프로퍼티를 통해 프로토타입에 접근하는 이유
 
 상호 참조에 의해 프로토타입 체인이 생성되는 것을 방지하기 위해서다.
 
@@ -142,9 +142,9 @@ parent.__proto__ = child;
 //서로가 자신의 프로토타입이 되는 비정상적인 프로토타입 체인이 만들어진다.
 ```
 
-- **proto**접근자 프로퍼티를 코드 내에서 직접 사용하는 것은 권장하지 않는다.
+- `__proto__`접근자 프로퍼티를 코드 내에서 직접 사용하는 것은 권장하지 않는다.
 
-모든 객체가 **proto** 접근자 프로퍼티를 사용할 수 있는 것은 아니기 때문.
+모든 객체가 `__proto__` 접근자 프로퍼티를 사용할 수 있는 것은 아니기 때문.
 
 참조를 취득, 교체하고 싶은 경우 Object.getPrototypeOf/Object.setPrototypeOf 메서드 사용을 권장.
 
