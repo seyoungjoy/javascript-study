@@ -96,18 +96,6 @@ console.log(Number.isInteger(two)); // ?
 console.log(Number.isInteger(three)); // ?
 ```
 
-```jsx
-const own = new Number(1); // Number {1}
-const two = Number(2); // 2
-const three = 3; // 3
-
-console.log(Number.isInteger(own)); // false
-console.log(Number.isInteger(two)); // true
-console.log(Number.isInteger(three)); // true
-
-console.log(typeof own, typeof two, typeof three); // object number number
-```
-
 new 생성자를 사용하지 않고 생성할 경우 객체를 반환하지 않고 원시 타입을 반환한다.
 
 즉, own의 타입은 Object이고 two, three는 Number 타입이기 때문에 `Number.isInteger(own)` 는 false 가 맞다.
@@ -160,7 +148,7 @@ console.log(typeof str, str); // string hello
 - **전역 객체**의 프로퍼티를 참조할 때 window(또는 global)를 생략할 수 있다.
   - 브라우저 환경에서의 전역 객체 : window(또는 self, this,frames)
   - Node.js 환경에서의 전역 객체 : global
-  - **globalThis :** ES11 에서 도입된 브라우저 환경과 Node.js 환경에서 전역 객체를 가리키던 다양한 식별자를 통일한 식별자다.
+  - globalThis : ES11 에서 도입된 브라우저 환경과 Node.js 환경에서 전역 객체를 가리키던 다양한 식별자를 통일한 식별자다.
 - **전역 객체**는 모든 표준 빌트인 객체를 프로퍼티로 가지고 있다.
 - 자바스크립트 실행 환경에 따라 추가적으로 프로퍼티와 메서드를 갖는다.
 - var 키워드로 선언한 전역 변수와 선언하지 않은 변수에 값을 할당한 암묵적 전역. 그리고 전역 함수는 전역 객체의 프로퍼티가 된다.
