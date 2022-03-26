@@ -394,3 +394,24 @@ const me = new Person('Lee');
 ```
 
 ### 19.9.2 인스턴스에 의한 프로토타입의 교체
+```jsx
+function Person(name){
+    this.name = name;
+}
+
+const me = new Person('Lee');
+
+//프로토타입으로 교체할 객체
+const parent = {
+    constructor: Person,
+    sayHello(){
+        console.log(`Hi! my name is ${this.name}`);
+    }
+};
+
+Person.prototype = parent;
+
+Object.setPrototypeOf(me, parent);
+
+me.sayHello();
+```
