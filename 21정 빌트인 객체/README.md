@@ -182,24 +182,92 @@ console.log(window.foo); // undefined
 
 ### 21.4.1 빌트인 전역 프로퍼티
 
-**빌트인 전역 프로퍼티**는 전역 객체의 프로퍼티를 의미한다.
+**빌트인 전역 프로퍼티**는 전역 객체의 프로퍼티를 의미한다.  
 
-- **Infinity 프로퍼티** : 무한대를 나타내는 숫자값 Infinity를 갖는다.
+- **Infinity 프로퍼티** : 무한대를 나타내는 숫자값 Infinity를 갖는다.  ****
 - **NaN 프로퍼티** : 숫자가 아님을 나타내는 숫자값 NaN을 갖는다.
 - **undefined 프로퍼티** : 원시타입 undefined를 값으로 갖는다.
 
-<br>
+```jsx
+console.log(window.Infinity === Infinity)  // true
+
+console.log(window.NaN);  // NaN
+
+console.log(window.undefined);  // undefined
+```
 
 ### 21.4.2 빌트인 전역 함수
 
 **빌트인 전역 함수**는 애플리케이션 전역에서 호출할 수 있는 빌트인 함수로서 전역 객체의 메서드다.
 
-- **eval 함수** : 주어진 문자열 코드를 런타임에 평가 또는 실행한다. (추천하지 않음)
+- **eval 함수** :  주어진 문자열 코드를 런타임에 평가 또는 실행한다. (추천하지 않음)
 - **isFinite 함수** : 전달받은 인수가 정상적인 유한수인지 확인하고 그 결과를 반환한다.
+    
+    ```jsx
+    isFinite(0);   // true
+    
+    // 인수가 무한수 또는 NaN으로 평가되는 값이면 false를 반환
+    isFinite(Infinity);  // false
+    isFinite(NaN);    // false
+    ```
+    
 - **isNaN 함수** : 전달받은 인수가 NaN인지 확인하고 그 결과를 반환한다.
 - **parseFloat 함수** : 전달받은 문자열 인수를 실수로 해석하여 반환한다.
 - **parseInt 함수** : 전달받은 문자열 인수를 정수로 해석하여 반환한다.
+    
+    ```jsx
+    // 문자열을 실수로 해석하여 반환
+    parseFloat('3.14');  // -> 3.14
+    parseFloat('10.00'); // -> 10
+    
+    // 공백으로 구분된 문자열은 첫 번째 문자열만 변환
+    parseFloat('34 45 66'); // -> 34
+    parseFloat('40 years'); // -> 40
+    
+    // 문자열을 정수로 해석하여 반환한다.
+    parseInt('10');     // -> 10
+    parseInt('10.123'); // -> 10
+    ```
+    
 - **encodeURI 함수** : 완전한 URI를 문자열로 전달받아 이스케이프 처리를 위해 인코딩한다.
 - **decodeURI 함수** : 인코딩된 URI를 인수로 전달받아 이스케이프 처리 이전으로 디코딩한다.
+    
+    ```jsx
+    const uri = 'http://example.com?name=이웅모&job=programmer&teacher';
+    
+    // encodeURI 함수는 완전한 URI를 전달받아 이스케이프 처리를 위해 인코딩한다.
+    const enc = encodeURI(uri);
+    console.log(enc);
+    // http://example.com?name=%EC%9D%B4%EC%9B%85%EB%AA%A8&job=programmer&teacher
+    
+    // decodeURI 함수는 인코딩된 완전한 URI를 전달받아 이스케이프 처리 이전으로 디코딩한다.
+    const dec = decodeURI(enc);
+    console.log(dec);
+    // http://example.com?name=이웅모&job=programmer&teacher
+    ```
+    
 - **encodeURIComponent 함수** : URI 구성 요소를 인수로 전달받아 인코딩한다.
-- **decodeURIComponent 함수** : 매개변수로 전달된 URI 구성 요소를 디코딩한다.
+- **decodeURIComponent 함수** : 매개변수로 전달된 URI 구성 요소를 디코딩한다. 
+```jsx
+const uriComp = 'name=이웅모&job=programmer&teacher';
+
+// encodeURIComponent 함수는 인수로 전달받은 문자열을 URI의 구성요소인 쿼리 스트링의 일부로 간주한다.
+// 따라서 쿼리 스트링 구분자로 사용되는 =, ?, &까지 인코딩한다.
+let enc = encodeURIComponent(uriComp);
+console.log(enc);
+// name%3D%EC%9D%B4%EC%9B%85%EB%AA%A8%26job%3Dprogrammer%26teacher
+
+let dec = decodeURIComponent(enc);
+console.log(dec);
+// 이웅모&job=programmer&teacher
+
+// encodeURI 함수는 인수로 전달받은 문자열을 완전한 URI로 간주한다.
+// 따라서 쿼리 스트링 구분자로 사용되는 =, ?, &를 인코딩하지 않는다.
+enc = encodeURI(uriComp);
+console.log(enc);
+// name=%EC%9D%B4%EC%9B%85%EB%AA%A8&job=programmer&teacher
+
+dec = decodeURI(enc);
+console.log(dec);
+// name=이웅모&job=programmer&teacher
+```
