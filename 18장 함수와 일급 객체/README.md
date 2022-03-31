@@ -51,13 +51,15 @@ console.log(increaser()); // 1
 
 ```jsx
 function square(number) {
+
 	return number * number;
 }
+
 
 console.log(Object.getOwnPropertyDescriptors(square));
 ```
 <p align='center'>
-<img src='https://bl3302files.storage.live.com/y4mCuiy5dN6lDlK4yOz5YAiPwibxN7yD6cz6zTEyZY50bnD4r5qDHeFVc1UqIOQ1ljaGN-fUEsZfQx3BX0zAY9Ze04-EOZsJcH4S72CfhnBrDbCQ8i0Tv2cs4i-pVhnSm--UiwHsC9agyWBoYmrieDclmYemunynmA9V9VFcz_ZkvS0Np7mmkz4PaCNIXarWwyh?width=1188&height=262&cropmode=none'>
+<img width='550px' src='https://bl3302files.storage.live.com/y4mCuiy5dN6lDlK4yOz5YAiPwibxN7yD6cz6zTEyZY50bnD4r5qDHeFVc1UqIOQ1ljaGN-fUEsZfQx3BX0zAY9Ze04-EOZsJcH4S72CfhnBrDbCQ8i0Tv2cs4i-pVhnSm--UiwHsC9agyWBoYmrieDclmYemunynmA9V9VFcz_ZkvS0Np7mmkz4PaCNIXarWwyh?width=1188&height=262&cropmode=none'>
 </p>
 
 <br/>
@@ -82,7 +84,7 @@ console.log(multiply(1, 2, 3));
 ```
 
 <p align='center'>
-<img src='https://bl3302files.storage.live.com/y4mqLKQCg69N9D1e5K3yigpnDIsHN7kBFtS44FM74JA7Cra1AVX6GUhdqBwXtSVVH7uK6BqgHc_A_IHVtLdh-EONCT96X1UqX0GG1r8nvwRwPY08e_FiQSRADzjNosQUDEefSFr2WNsGKllnPEac74cZZHaJ_ChK2_1kxGu7CcB536-_7-jv8CKO6c0r0AHNrnk?width=938&height=560&cropmode=none'>
+<img width='350px' src='https://bl3302files.storage.live.com/y4mqLKQCg69N9D1e5K3yigpnDIsHN7kBFtS44FM74JA7Cra1AVX6GUhdqBwXtSVVH7uK6BqgHc_A_IHVtLdh-EONCT96X1UqX0GG1r8nvwRwPY08e_FiQSRADzjNosQUDEefSFr2WNsGKllnPEac74cZZHaJ_ChK2_1kxGu7CcB536-_7-jv8CKO6c0r0AHNrnk?width=938&height=560&cropmode=none'>
 </p>
 
 `arguments` 객체는 인수를 프로퍼티 값으로 소유하며, 프로퍼티 키는 인수의 순서를 나타낸다. `callee` 프로퍼티는 함수 자신을 가리키고, `length` 프로퍼티는 인수의 개수를 가리킨다. `Symbol.iterator` 프로퍼티는 객체를 iterable로 만들기 위한 프로퍼티다. 이는 34장에서 자세히 살펴본다.
