@@ -32,26 +32,26 @@ obj.foo(); // -> 1
 | ES6 함수의 구분 | constructor | prototype | super | arguments |
 | --------------- | ----------- | --------- | ----- | --------- |
 | 일반 함수       | O           | O         | X     | O         |
-| 메소드          | X           | X         | O     | O         |
+| 메서드          | X           | X         | O     | O         |
 | 화살표 함수     | X           | X         | X     | X         |
 
 <br>
 
 ---
 
-## 26.2 메소드
+## 26.2 메서드
 
-- **"메소드 축약 표현으로 정의된 함수"**
+- **"메서드 축약 표현으로 정의된 함수"**
 
 |        | constructor | prototype | super | arguments |
 | ------ | ----------- | --------- | ----- | --------- |
-| 메소드 | X           | X         | O     | O         |
+| 메서드 | X           | X         | O     | O         |
 
 - non-constructor → 생성자 함수로 호출 X → 호출시 TypeError
 - prototype 프로퍼티 X → 프로토타입 생성 X
-- 메소드가 바인딩된 객체를 가리키는 내부 슬롯 `[[HomeObject]]` 가짐 → `super` 참조는 내부 슬롯 `[[HomeObject]]`를 사용하여 수퍼클래스의 메소드를 참조 가능
+- 메서드가 바인딩된 객체를 가리키는 내부 슬롯 `[[HomeObject]]` 가짐 → `super` 참조는 내부 슬롯 `[[HomeObject]]`를 사용하여 수퍼클래스의 메서드를 참조 가능
   - pseudo-code: `[[HomeObject]].__proto__`를 통해 수퍼 클래스 접근
-  - ES6 메소드가 아니면 `super` 사용 불가(`[[HomeObject]]`없기 때문)
+  - ES6 메서드가 아니면 `super` 사용 불가(`[[HomeObject]]`없기 때문)
 
 <br>
 
@@ -273,7 +273,7 @@ console.log(counter.increase()); // NaN
 <br>
 
 - 화살표 함수 내부의 `this`는 결정된 이후 변경 불가능
-  - `Function.prototype.call/apply/bind` 메소드를 통해 `this` 변경 불가능(단, 함수 사용은 가능. 즉 `call`,`apply`통해서 함수 호출 가능)
+  - `Function.prototype.call/apply/bind` 메서드를 통해 `this` 변경 불가능(단, 함수 사용은 가능. 즉 `call`,`apply`통해서 함수 호출 가능)
 
 ```javascript
 window.x = 1;
@@ -297,12 +297,12 @@ console.log(add.bind(null, 1, 2)()); // 3
 
 <br>
 
-- 메소드나 프로토타입 객체에 화살표 함수를 할당하지 말자 → 둘 다 일반함수로 호출되기 때문에 `this`는 전역객체를 가리킴
-  - 메소드 → ES6 메소드 정의를 사용!
+- 메서드나 프로토타입 객체에 화살표 함수를 할당하지 말자 → 둘 다 일반함수로 호출되기 때문에 `this`는 전역객체를 가리킴
+  - 메서드 → ES6 메서드 정의를 사용!
   - 프로토타입 객체 → 일반 함수 할당
 
 ```javascript
-// 메소드
+// 메서드
 const person = {
   name: 'Joo',
   sayHi: () => console.log(`Hi ${this.name}`)
@@ -313,7 +313,7 @@ const person = {
   },
 };
 
-// 프로토타입 메소드
+// 프로토타입 메서드
 // this는 전역객체를 가리킴
 Person.prototype.sayHi = () => console.log(`Hi ${this.name}`);
 
@@ -378,11 +378,11 @@ class Base {
 }
 
 class Derived extends Base {
-  // super 키워드는 ES6 메소드 내에서만 사용 가능하다.
+  // super 키워드는 ES6 메서드 내에서만 사용 가능하다.
   // 화살표 함수 foo의 상위 컨텍스트는 constructor이다.
   sayHi = () => `${super.sayHi()} how are you doing?`;
 
-  // 위에 클래스 필드 정의는 사실상 constructor안에 인스턴스 메소드를 정의하는것과 같다
+  // 위에 클래스 필드 정의는 사실상 constructor안에 인스턴스 메서드를 정의하는것과 같다
   // 따라서 화살표 함수의super는 constructor의 super를 가리킴
   // constructor {
   //   this.sayHi = () => `{super.sayHi()} how are you doing?`;
@@ -469,7 +469,7 @@ console.log(bar.length); // 2
 
 ### 26.4.2 Rest 파라미터와 arguments 객체
 
-- ES5에서 `arguments` 객체는 유사배열객체이기 때문에 배열 메소드를 사용할 수 없음 → 배열 메소드를 사용하려면 유사배열객체를 배열로 변환
+- ES5에서 `arguments` 객체는 유사배열객체이기 때문에 배열 메서드를 사용할 수 없음 → 배열 메서드를 사용하려면 유사배열객체를 배열로 변환
 - ES6부터는 rest 파라미터를 통해 가변 인자 목록을 배열로 직접 전달 받음
 
 ```javascript
