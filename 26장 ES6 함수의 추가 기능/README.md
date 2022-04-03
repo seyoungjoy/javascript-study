@@ -25,7 +25,6 @@ obj.foo(); // -> 1
 - ES6 이전의 모든 함수는 callable & constructor
   - 즉, 객체에 바인딩된 함수와 콜백함수도 constructor -> prototype 프로퍼티를 가지며, 프로토타입 객체 생성 -> 성능상 문제
 - 이를 위해, ES6에서는 함수를 사용 목적에 따라 3가지 종류로 구분한다.
-  <br>
 
 **ES6 함수의 구분**
 
@@ -35,34 +34,66 @@ obj.foo(); // -> 1
 | 메서드          | X           | X         | O     | O         |
 | 화살표 함수     | X           | X         | X     | X         |
 
-<br>
-
 ---
 
 ## 26.2 메서드
 
-- **"메서드 축약 표현으로 정의된 함수"**
+- ES6 이전 사양에는 메서드에 대한 명확한 정의가 없다. 일반적으로 메서드는 객체에 바인딩된 함수를 일컫는 의미로 사용되었다.
+- ES6 사양에서는 메서드(ES6메서드)는 **"메서드 축약 표현으로 정의된 함수"** 만을 의미한다.
 
-|        | constructor | prototype | super | arguments |
-| ------ | ----------- | --------- | ----- | --------- |
-| 메서드 | X           | X         | O     | O         |
+```javascript
+const obj = {
+  x: 1,
+  foo() {
+    return this.x;
+  }, // ES6 메서드
+  bar: function () {
+    return this.x;
+  }, // 일반함수
+};
+```
 
 - non-constructor → 생성자 함수로 호출 X → 호출시 TypeError
 - prototype 프로퍼티 X → 프로토타입 생성 X
-- 메서드가 바인딩된 객체를 가리키는 내부 슬롯 `[[HomeObject]]` 가짐 → `super` 참조는 내부 슬롯 `[[HomeObject]]`를 사용하여 수퍼클래스의 메서드를 참조 가능
-  - pseudo-code: `[[HomeObject]].__proto__`를 통해 수퍼 클래스 접근
-  - ES6 메서드가 아니면 `super` 사용 불가(`[[HomeObject]]`없기 때문)
+- ES6 메서드는 자신을 바인딩한 객체를 가리키는 내부 슬롯 `[[HomeObject]]` 가짐 → `super` 참조는 내부 슬롯 `[[HomeObject]]`를 사용하여 수퍼클래스의 메서드를 참조 가능
+- ES6 메서드가 아닌 함수는 내부 슬롯 `[[HomeObject]]`를 갖지 않기 때문에 `super` 키워드를 사용할 수 없다 -> 사용시 SyntaxError
 
-<br>
+```javascript
+const base = {
+  name: 'Lee',
+  sayHi() {
+    return `Hi! ${this.name}`;
+  },
+};
+
+const derived = {
+  __proto__: base,
+  sayHi() {
+    return `${super.sayHi()}. How are you doing?`;
+  },
+};
+
+console.log(derived.sayHi()); // Hi! Lee. How are you doing?
+```
+
+- 메서드를 정의할 대 프로퍼티 값으로 익명 함수 표현식을 할당하는 ES6 이전 방식은 권장하지 않는다.
 
 ---
 
 ## 26.3 화살표 함수
 
+- `function` 키워드 대신 **화살표(`=>`)** 를 통해 간략하게 함수 정의 가능
+- 화살표 함수는 콜백 함수 내부에서 `this`가 전역 객체를 가리키는 문제를 해결하기 위한 대안으로 유용
+
 ### 26.3.1 화살표 함수 정의
 
-- `function` 키워드 대신 **화살표(`=>`)**
-- 즉, 함수 선언문으로 정의할 수 없고 함수 표현식으로 정의
+**함수 정의**
+
+- 함수 선언문으로 정의할 수 없고 함수 표현식으로 정의
+
+```javascript
+const multiply = (x, y) => x * y;
+```
 
 **매개변수 선언**
 
@@ -77,16 +108,17 @@ const arrow2= x => { ... }
 const arrow3 = () => { ... }
 ```
 
-<br>
-
 **함수몸체 정의**
 
-- 함수 몸체가 한 줄의 문인 경우 → 중괄호 {} 생략 가능 → 문을 암묵적으로 반환
+- 함수 몸체가 한 줄의 문인 경우 → 중괄호 {} 생략 가능 → 함수 몸체 내부의 문이 표현식인 문이라면 암묵적으로 반환
 
 ```javascript
 // 함수 몸체가 한 줄의 문 → 중괄호 {} 생략 가능 → 문을 암묵적으로 반환
-(x) => x + x;
-// x => { return x + x; }와 동일
+const power = x => x ** 2;
+// const power = x => { return x **2; }와 동일
+
+// 함수 몸체 내부의 문이 표현식이 아닌 문이라면 에러 발생
+const arrow = () => const x = 1; // SyntaxError: Unexpected token 'const'
 
 const now = () => Date.now();
 // const now = function() { return Date.now(); };
@@ -95,7 +127,17 @@ const identity = (value) => value;
 // var identity = function(value) { return value; };
 ```
 
-<br>
+- 객체 리터럴을 반환하는 경우 → 객체 리터럴을 소괄호 ()로 감싸주어야함
+
+```javascript
+const arrow = () => ({ a: 1 });
+// const arrow = () => {return { a:1 }; }
+
+const create = (id, content) => ({ id, content });
+// const create = function(id, content) {
+//   return {id, content};
+// };
+```
 
 - 함수 몸체가 여러 줄의 문인 경우 → 중괄호 {} 생략 불가능 → 명시적으로 `return`
 
@@ -105,22 +147,6 @@ const sum = (a, b) => {
   return result;
 };
 ```
-
-<br>
-
-- 객체 리터럴을 반환하는 경우 → 객체 리터럴을 소괄호 ()로 감싸주어야함
-
-```javascript
-() => ({ a: 1})
-// () => {return { a:1 }; }
-
-const create = (id, content) => ({id, content});
-// const create = function(id, content) {
-  return {id, content};
-};
-```
-
-<br>
 
 - 즉시 실행 함수로 사용 가능
 
@@ -138,7 +164,17 @@ const person = ((name) => ({
 // })('Joo');
 ```
 
-<br>
+- 화살표 함수도 일급 객체이므로 고차함수의 인수로 전달 가능 -> 표현이 간결하고 가독성 향상
+
+```javascript
+// ES5
+[1, 2, 3].map(function (v) {
+  return v * 2;
+});
+
+// ES6
+[1, 2, 3].map((v) => v * 2);
+```
 
 ### 26.3.2 화살표 함수와 일반 함수의 차이
 
@@ -146,8 +182,6 @@ const person = ((name) => ({
 
 - `new` 연산자를 통해 생성자 함수로 호출 불가능
 - prototype 프로퍼티 X → 프로토타입 생성 X
-
-<br>
 
 2. **중복된 매개 변수 이름 X**
 
@@ -158,13 +192,9 @@ const sum = (a, a) => a + a;
 // SyntaxError: Duplicate parameter name not allowed in this context
 ```
 
-<br>
+3. **화살표 함수 자체의 `this`, `arguments`, `super`, `new.target` 바인딩을 갖지 않는다**
 
-3. **화살표 함수 자체의 this, arguments, super, new.target 바인딩을 갖지 않는다**
-
-- 화살표 함수가 중첩 함수인 경우 상위 스코프에 존재하는 가장 가까운 함수 중에서 화살표 함수가 아닌 부모 함수의 `this`, `arguments`, `super`, `new.target`을 참조한다
-
-<br>
+- 화살표 함수가 중첩 함수인 경우 상위 스코프에 존재하는 가장 가까운 함수 중에서 화살표 함수가 아닌 함수의 `this`, `arguments`, `super`, `new.target`을 참조한다
 
 ### 26.3.3 `this`
 
@@ -223,21 +253,18 @@ prefixArray(arr) {
 }
 ```
 
-<br>
-
 - **화살표 함수 사용!**
-  - 화살표 함수 자체의 this 바인딩 없음 → 화살표 함수 내부에서 this를 참조하면 렉시컬 스코프와 같이 화살표 함수가 정의된 위치에 의해 결정됨(Lexical this)
+  - 화살표 함수 자체의 `this` 바인딩 없음 → 스코프 체인 상에서 가장 가까운 상위 함수 중에서 화살표 함수가 아닌 함수의 `this`를 참조
+  - Lexical this: 렉시컬 스코프와 같이 화살표 함수가 정의된 위치에 의해 `this`가 결정됨
 
 ```javascript
 prefixArray(arr) {
-  return arr.map(item => `{this.prefix} ${item}`);
+  return arr.map(item => `${this.prefix} ${item}`);
 }
 // 인수로 넘겨질때 화살표 함수 정의가 평가되고 객체가 생성됨
 // 즉, prefixArray몸체 내부에서 정의되고 인수로 넘겨진것과 같은 동작원리
 // 그때 화살표 함수의 this는 prefixArray의 this를 가리킴
 ```
-
-<br>
 
 - 화살표 함수가 중첩함수인 경우, 상위 스코프에 가장 가까운 함수 중에서 화살표 함수가 아닌 부모 함수의 `this`를 참조
 
@@ -270,10 +297,8 @@ const counter = {
 console.log(counter.increase()); // NaN
 ```
 
-<br>
-
 - 화살표 함수 내부의 `this`는 결정된 이후 변경 불가능
-  - `Function.prototype.call/apply/bind` 메서드를 통해 `this` 변경 불가능(단, 함수 사용은 가능. 즉 `call`,`apply`통해서 함수 호출 가능)
+  - `Function.prototype.call/apply/bind` 메서드를 통해 `this` 변경 불가능(단, 함수 사용은 가능. `call`,`apply`통해서 함수 호출 가능)
 
 ```javascript
 window.x = 1;
@@ -294,8 +319,6 @@ console.log(add.call(null, 1, 2)); // 3
 console.log(add.apply(null, [1, 2])); // 3
 console.log(add.bind(null, 1, 2)()); // 3
 ```
-
-<br>
 
 - 메서드나 프로토타입 객체에 화살표 함수를 할당하지 말자 → 둘 다 일반함수로 호출되기 때문에 `this`는 전역객체를 가리킴
   - 메서드 → ES6 메서드 정의를 사용!
@@ -322,13 +345,13 @@ Person.prototype.sayHello = function () {
 };
 ```
 
-<br>
-
 - 클래스 필드에 화살표 함수 할당 가능 → `this`는 constructor의 `this`와 같음 → 클래스가 생성할 인스턴스를 가리킴
+- 메서드를 정의할 때는 ES6 메서드를 사용 권장
 
 ```javascript
 // BAD
 class Person {
+  // 클래스 필드 정의 제안
   name = 'Joo';
   sayHi = () => console.log(`Hi ${this.name}`);
 }
@@ -351,6 +374,7 @@ class Person {
   // 클래스 필드 정의
   name = 'Lee';
 
+  // ES6 메서드 -> 프로토타입 메서드
   sayHi() {
     console.log(`Hi ${this.name}`);
   }
@@ -359,12 +383,10 @@ const person = new Person();
 person.sayHi(); // Hi Lee
 ```
 
-<br>
-
 ### 26.3.4 `super`
 
 - 화살표 함수는 함수 자체의 `super` 바인딩이 없다.
-- 상위 컨텍스트의 `super`를 참조
+- 화살표 함수 내부에서 `super`를 참조하면 상위 스코프의 `super`를 참조
 
 ```javascript
 class Base {
@@ -379,7 +401,7 @@ class Base {
 
 class Derived extends Base {
   // super 키워드는 ES6 메서드 내에서만 사용 가능하다.
-  // 화살표 함수 foo의 상위 컨텍스트는 constructor이다.
+  // 화살표 함수 foo의 상위 스코프는 constructor이다.
   sayHi = () => `${super.sayHi()} how are you doing?`;
 
   // 위에 클래스 필드 정의는 사실상 constructor안에 인스턴스 메서드를 정의하는것과 같다
@@ -393,12 +415,10 @@ const derived = new Derived('Lee');
 console.log(derived.sayHi()); // Hi! Lee how are you doing?
 ```
 
-<br>
-
 ### 26.3.5 `arguments`
 
 - 화살표 함수는 함수 자체의 `arguments` 바인딩이 없다.
-- 상위 컨텍스트의 `arguments`를 참조 → 하지만 화살표 함수 자신에게 전달된 인수 목록을 확인할 수 없음
+- 상위 스코프의 `arguments`를 참조 → 하지만 화살표 함수 자신에게 전달된 인수 목록을 확인할 수 없음
 - 화살표 함수로 가변 인자 함수를 구현할 때는 반드시 rest 파라미터 사용
 
 ```javascript
@@ -413,8 +433,6 @@ console.log(derived.sayHi()); // Hi! Lee how are you doing?
 const foo = () => console.log(arguments);
 foo(1, 2); // ReferenceError: arguments is not defined
 ```
-
-<br>
 
 ---
 
@@ -432,8 +450,6 @@ function foo(...rest) {
 
 foo(1, 2, 3);
 ```
-
-<br>
 
 - 반드시 마지막 파라미터이어야 한다.
 - Rest 파라미터는 단 하나만 선언 가능하다.
@@ -453,8 +469,6 @@ foo2(1, 2, 3); // SyntaxError: Rest parameter must be last formal parameter
 foo3(1, 2, 3); // SyntaxError: Rest parameter must be last formal parameter
 ```
 
-<br>
-
 - 함수 객체의 length(매개변수 개수) 프로퍼티에 영향 X
 
 ```javascript
@@ -464,8 +478,6 @@ console.log(foo.length); // 0
 function bar(x, y, ...rest) {}
 console.log(bar.length); // 2
 ```
-
-<br>
 
 ### 26.4.2 Rest 파라미터와 arguments 객체
 
@@ -539,8 +551,6 @@ console.log(logName(undefined)); // Joo
 console.log(logName(null)); // null
 ```
 
-<br>
-
 - rest 파라미터에는 기본값을 지정 불가능
 
 ```javascript
@@ -549,8 +559,6 @@ function foo(...rest = []) {
 }
 // SyntaxError: Rest parameter may not have a default initializer
 ```
-
-<br>
 
 - 매개변수 기본값은 length 프로퍼티(매개변수 개수)와 `arguments` 객체에 영향 X
 
@@ -564,5 +572,3 @@ console.log(sum.length); // 1
 sum(1); // Arguments { '0': 1};
 sum(1, 2); // Arguments { '0': 1, '1': 2};
 ```
-
-<br>
