@@ -120,27 +120,3 @@ Math.min.apply(null, [1,2,3]);
 // ES6 스프레드 문법
 Math.min(...[1,2,3]);
 ```
-
-29장 Math
-1. 아래 참조값을 말해주세요.
-```jsx
-console.log(Math.abs(-1));
-
-console.log(Math.round(1.5));
-console.log(Math.round(-1.2));
-
-console.log(Math.ceil(1.2));
-console.log(Math.ceil(-1.2));
-
-console.log(Math.floor(9.1)) ;
-console.log(Math.floor(-1.9));
-
-console.log(Math.sqrt(9));
-
-console.log(Math.pow(2,3));
-
-console.log(Math.max());
-console.log(Math.min());
-
-```
-
