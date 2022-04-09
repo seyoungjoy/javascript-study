@@ -72,8 +72,8 @@ console.log(circle1.getArea());
 //자신의 상태를 나타내는 radius 프로퍼티만 개별적으로 소유하고
 //내용이 동일한 메서드는 상속을 통해 공유하여 사용하는 것
 ```
-<p align="center"><img src="https://user-images.githubusercontent.com/85421850/160261619-1a8d5279-b93f-40c7-96a1-4440bc764b86.png" width='60%'/>
 
+<p align="center"><img src="https://user-images.githubusercontent.com/85421850/160261619-1a8d5279-b93f-40c7-96a1-4440bc764b86.png" width='60%'/>
 
 ## 19.3 프로토타입 객체
 
@@ -130,8 +130,6 @@ console.log(person.hasOwnProperty('__proto__')); //false
 console.log(person.__proto__ === Object.prototype); //true
 ```
 
-
-
 - `__proto__` 접근자 프로퍼티를 통해 프로토타입에 접근하는 이유
 
 상호 참조에 의해 프로토타입 체인이 생성되는 것을 방지하기 위해서다.
@@ -160,11 +158,12 @@ parent.__proto__ = child;
 - 생성자 함수로서 호출할 수 없는 함수, non-constructor 인 화살표 함수와 ES6 메서드 축약 표현으로 정의한 메서드는 prototype 프로퍼티를 소유하지 않으며 프로토타입도 생성하지 않는다.
 - 모든 객체가 가지고 있는 `__proto__` 접근자 프로퍼티와 함수 객체만이 가지고 있는 `prototype 프로퍼티`는 결국 동일한 프로토타입을 가리킨다. 하지만 프로퍼티를 사용하는 주체는 다르다.
 
-| 구분 | 소유 | 값 | 사용 주체 | 사용 목적 |
-| --- | --- | --- | --- | --- |
-| `__proto__` | 모든 객체 | 프로토타입의 참조 | 모든 객체 | 객체가 자신의 프로토타입에 접근 또는 교체하기 위해 사용 |
+| 구분               | 소유        | 값                | 사용 주체   | 사용 목적                                                              |
+| ------------------ | ----------- | ----------------- | ----------- | ---------------------------------------------------------------------- |
+| `__proto__`        | 모든 객체   | 프로토타입의 참조 | 모든 객체   | 객체가 자신의 프로토타입에 접근 또는 교체하기 위해 사용                |
 | prototype 프로퍼티 | constructor | 프로토타입의 참조 | 생성자 함수 | 생성자 함수가 자신이 생성할 인스턴스의 프로토타입을 할당하기 위해 사용 |
-|  |  |  |  |  |
+|                    |             |                   |             |                                                                        |
+
 <p align="center"><img src="https://user-images.githubusercontent.com/85421850/160229060-5e9fd2f2-2b7d-402b-9766-b822544d9791.png" width='70%'/>
 
 ```jsx
@@ -279,6 +278,7 @@ console.log(foo.constructor === Function); //true
 - 모든 빌트인 생성자 함수는 전역 객체가 생성되는 시점에 생성된다.
 
 ## 19.6 객체 생성 방식과 프로토타입의 결정
+
 - 객체는 다음과 같이 다양한 생성 방법이 있다.
   1. 객체 리터럴
   2. Object 생성자 함수
@@ -290,6 +290,7 @@ console.log(foo.constructor === Function); //true
 - 각각의 프로토타입은 추상 연산 OrdinaryObjectCreate에 전달되는 인수에 의해 결정된다.
 
 ### 19.6.1 객체 리터럴에 의해 생성된 객체의 프로토타입
+
 - 객체 리터럴을 평가해 객체를 생성할 때 추상연산 OrdinaryObjectCreate를 호출한다.
 - 이때 추상연산 OrdinaryObjectCreate에 전달되는 프로토타입은 Object.prototype이다.
 - 객체 리터럴에 의해 생성되는 객체의 프로토타입은 Object.prototype이다.
@@ -302,11 +303,13 @@ console.log(obj.hasOwnProperty('x')); //true
 ```
 
 ### 19.6.2 Object 생성자 함수에 의해 생성된 객체의 프로토타입
+
 - Object 생성자 함수로 객체가 만들어질때 전달되는 프로토타입은 Object.prototype이다.
 
 ### 19.6.3 생성자 함수에 의해 생성된 객체의 프로토타입
+
 - 생성자 함수에서 인스턴스를 생성할 때는 추상 연산 OrdinaryObjectCreate에 전달되는 프로토타입은
-- 생성자 함수의 prototype 프로퍼티에 바인딩되어 있는 객체다 
+- 생성자 함수의 prototype 프로퍼티에 바인딩되어 있는 객체다
 - 즉 `Person`이라는 생성자 함수의 인스턴스들의 프로토타입은 `Person.prototyp`e이 된다.
 
 ## 19.7 프로토타입 체인
