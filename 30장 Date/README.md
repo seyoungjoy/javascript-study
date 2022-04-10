@@ -5,14 +5,14 @@
 - 현재 날짜와 시간은 자바스크립트 코드가 실행된 시스템의 시계에 의해 결정된다.
 
 ## 30.1 Date 생성자 함수
-- Data 생성자 함수로 생성한 Date 객체는 내부적으로 날짜와 시간을 나타내는 정수값을 갖는다.
+- Date 생성자 함수로 생성한 Date 객체는 내부적으로 날짜와 시간을 나타내는 정수값을 갖는다.
 - 이 값은 1970년 1월 1일 00:00:00(UTC)을 기점으로 Date 객체가 나타내는 날짜와 시간까지의 밀리초를 나타낸다.
 - 예를 들어 모든 시간의 기점인 1970년 1월 1일 0시를 나타내는 Date 객체는 내부적으로 정수값 0을 가지며,
 - 1970년 1월 1일 0시를 기점으로 하루가 지난 1970년 1월 2일 0시를 나타내는 Date 객체는 내부적으로 정수값 86,400,000(24h * 60m * 60s * 1000ms)
 - Date 생성자 함수로 객체를 생성하는 방법은 다음과 같이 4가지가 있다.
 
 ### 30.1.1 new Date()
-- new 연산자와 함께 호출하면 현재 날짜와 시간을 가지는 Date 객체를 반환한한다.
+- new 연산자와 함께 호출하면 현재 날짜와 시간을 가지는 Date 객체를 반환한다.
 - Date 객체는 내부적으로는 날짜와 시간을 나타내는 정수값을 갖지만 Date 객체를 콘솔에 출력하면 기본적으로 날짜와 시간 정보를 출력한다.
 - Date 생성자 함수를 new 연산자 없이 호출하면 Date 객체를 반환하지 않고 날짜와 시간 정보를 나타내는 문자열을 반환한다.
 ```jsx
@@ -47,11 +47,14 @@ console.log(date) //Tue May 26 2020 10:00:00 GMT+0900 (한국 표준시)
 
 ### 30.1.4 new Date(year, month[, day, hour, minute, second, millisecond])
 - Date 생성자 함수에 연, 월, 일, 시, 분, 초, 밀리초를 의미하는 숫자를 인수로 전달하면 지정된 날짜와 시간을 나타내는 Date 객체를 반환한다.
-
+```jsx
+const date = new Date(2020, 2, 26, 10, 00, 00, 0);
+console.log(date) //Thu Mar 26 2020 10:00:00 GMT+0900 (한국 표준시)
+```
 
 ## 30.2 Date 메서드
 
-### 30.2.1 Date.new
+### 30.2.1 Date.now
 - 1970년 1월 1일 00:00:00(UTC)을 기점으로 현재 시간까지 경과한 밀리초를 숫자로 반환한다.
 ```jsx
     const now = Date.now();
@@ -67,7 +70,7 @@ console.log(date) //86400000
 
 ### 30.2.3 Date.UTC
 - 1970년 1월 1일 00:00:00(UTC) 기점으로 인수로 전달된 시간까지의 밀리초를 숫자로 반환한다.
-- 
+
 ```jsx
 const date = Date.UTC(1970, 0, 2);
 const date = Date.UTC('1970/1/2');
@@ -112,6 +115,7 @@ console.log(today.getDate());//28
 
 ### 30.2.10 Date.prototype.getDay
 - Date 객체의 요일(0~6)을 나타내는 정수를 반환
+<p align="center">
 
 |요일|반환값|
 |:---:|:---:|
@@ -122,6 +126,7 @@ console.log(today.getDate());//28
 |목요일|4|
 |금요일|5|
 |토요일|6|
+</p>
 
 ```jsx
 const date = new Date('2020/07/24').getDay();
@@ -180,9 +185,18 @@ console.log(today); //Fri Apr 08 2022 07:22:30 GMT+0900 (한국 표준시)
 
 ### 30.2.19 Date.prototype.getTime
 - 1970년 1월 1일 00:00:00을 기점으로 Date 객체의 시간까지 경과된 밀리초를 반환
-
+```jsx
+new Date('2020/07/24/12:30').getTime();
+//1595561400000
+```
 ### 30.2.20 Date.prototype.setTime
 - Date 객체에 1970년 1월 1일 00:00:00를 기점으로 경과된 밀리초를 설정한다.
+```jsx
+const today = new Date();
+today.setTime(1595561400000);
+console.log(today)
+//Fri Jul 24 2020 12:30:00 GMT+0900 (한국 표준시)
+```
 
 ### 30.2.21 Date.prototype.getTimezoneOffset
 - UTC와 Date 객체에 지정된 로켈 시간과의 차이를 분 단위로 반환한다.
