@@ -24,12 +24,12 @@ console.log(Math.abs()); //NaN
 ### 29.2.2 Math.round
 - 인수로 전달된 숫자의 소수점 이하를 반올림한 정수를 반환.
 ```jsx
-console.log(Math.round(1.4));
-console.log(Math.round(1.6));
-console.log(Math.round(-1.4));
-console.log(Math.round(-1.6));
-console.log(Math.round(1));
-console.log(Math.round());
+console.log(Math.round(1.4)); //1
+console.log(Math.round(1.6)); //2
+console.log(Math.round(-1.4)); //-1 
+console.log(Math.round(-1.6)); //-2
+console.log(Math.round(1)); //1
+console.log(Math.round()); //NaN
 ```
 ### 29.2.3 Math.ceil
 - 인수로 전달된 숫자의 소수점 이하를 올림한 정수를 반환
@@ -52,6 +52,7 @@ console.log(Math.ceil()); //NaN
 ```
 
 ### 29.2.5 Math.sqrt
+- sqrt(square root)
 - 인수로 전달된 숫자의 제곱근을 반환
 
 ```jsx
@@ -79,7 +80,7 @@ console.log(random);
 ```jsx
 Math.pow(2,3); //8
 Math.pow(2,-1); //0.5
-Math.pow(2);
+Math.pow(2); //NaN
 
 //ES7에서 도입된 지수 연산자를 사용하면 가독성이 더 좋다.
 console.log(2**3); //8

@@ -26,7 +26,7 @@
 const tel = '010-1234-5673'
 const regExp = /^\d{3}-\d{4}\-\d{4}$/;
 
-console.log(regExp.exec(tel));
+regExp.exec(tel);
 //['010-1234-5673', index: 0, input: '010-1234-5673', groups: undefined]
 
 //** 매칭 결과가 없는 경우 null을 반환
@@ -125,7 +125,7 @@ console.log(target.match(/is/ig));
 ```
 
 ### 31.5.2 임의의 문자열 검색
-- .은 임의의 문자 한 개를 의미한다.
+- `.`은 임의의 문자 한 개를 의미한다.
 ```jsx
 const target = 'Is this all there is?';
 //... 세 개로 패턴을 생성했을 때 3자리 문자열과 매치한다.
@@ -173,9 +173,9 @@ console.log(target.match(regExp));
 ```
 
 ### 31.5.4 OR 검색
-- `|` : or을 의미
+- `|` : 파이프는 or을 의미
 - `[]` : 대괄호 내의 문자는 or로 동작
-- `[ - ]` : 범위를 지정.
+- `[ - ]` : 하이픈(-)으로 범위를 지정.
 ```jsx
 const target = 'A AA B BB Aa Bb ZZ';
 
@@ -239,7 +239,7 @@ const regExp = /[0-9,]+/g;
 ```jsx
 const target = 'AA BB 12,345';
 
-// 0~9가 한번 이상 반복되는 문자열을 전역 검색
+// 0~9가 한번 이상 반복되지 않는 문자열을 전역 검색
 const regExp = /[^0-9]+/g;
 
 console.log(target.match(regExp));
