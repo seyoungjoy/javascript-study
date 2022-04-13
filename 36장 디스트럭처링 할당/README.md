@@ -15,7 +15,7 @@ var three = arr[2];
 
 console.log(one, two, three);
 ```
-- ES6의 배열 디스트럭처링 할당은 배열의 각 요소를 배열로부터 추출하여 1개이 상의 변수에 할당한다.
+- ES6의 배열 디스트럭처링 할당은 배열의 각 요소를 배열로부터 추출하여 1개 이상의 변수에 할당한다.
 - 이때 배열 디스트럭처링 할당의 대상은 이터러블이어야 하며, 할당 기준은 배열의 인덱스다. 즉 순서대로 할당된다.
 ```jsx
 const arr = [1,2,3];
@@ -39,6 +39,7 @@ console.log(e,f,g) //1 2 3
 function parseURL(url = ''){
     const parsedURL = url.match(/^(\w+):\/\/([^/]+)\/(.*)$/);
     console.log(parsedURL);
+    //['https://section.blog.naver.com/BlogHome', 'https', 'section.blog.naver.com', 'BlogHome']
     if(!parsedURL) return{};
 
     const [, protocol, host, path] = parsedURL;
@@ -83,11 +84,50 @@ const {lastName:lastName, firstName : firstName} = user;
 ```
 - 객체 디스트럭처링 할당을 위한 변수에 기본값을 설정할 수 있다.
 ```jsx
-
-const {firstName = 'Ungmo', lastName} = {lastNAme:'Lee'}
-console.log(firstName, lastName);
+const {firstName = 'Ungmo', lastName} = {lastName:'Lee'}
+console.log(firstName, lastName);//Ungmo Lee
 
 const {firstName:fn='Ungmo', lastName:In} = {lastName:'Lee'};
-console.log(fn, In);
+console.log(fn, In);//Ungmo Lee
 ```
 
+- 객체에서 프로퍼티 키로 필요한 프로퍼티 값만 추출하여 변수에 할당하고 싶을 때 유용하다.
+```jsx
+const todo = {id:1, content:'HTML', completed:true};
+
+//ES5
+const id = todo.id;
+
+//비구조화 할당
+const {id} = todo;
+```
+- 배열의 요소가 객체인 경우 배열 디스트럭처링 할당과 객체 디스트럭처링 할당을 혼용할 수 있다.
+```jsx
+const todos = [
+    {id:1, content:'HTML', completed:true},
+    {id:2, content:'CSS', completed:true},
+    {id:3, content:'JS', completed:true},
+]
+
+const [,{id}] = todos;
+console.log(id);//2
+```
+- 중첩 객체의 경우 다음과 같으 사용.
+```jsx
+const user = {
+    name:'Lee',
+    address:{
+        zipCode:'03068',
+        city:'Seoul'
+    }
+};
+
+//address 프로퍼티 키로 객체를 추출하고 이 객체의 city 프로퍼티 키로 값을 추출한다.
+const {address:{city}} = user;
+console.log(city); //Seoul
+```
+- 할당을 위한 변수에 Rest 프로퍼티를 사용할 수 있다.
+```jsx
+const {x, ...rest} = {x:1, y:2, z:3};
+console.log(x, rest);//1 {y: 2, z: 3}
+```
