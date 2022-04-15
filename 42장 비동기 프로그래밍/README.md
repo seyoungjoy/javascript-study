@@ -4,7 +4,9 @@
 
 다음 예제의 `foo` 함수와 `bar` 함수는 호출된 순서대로 스택 자료 구조인 실행 컨텍스트 스택에 푸시되어 실행된다.
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/9fe601e7-e534-4c61-9d86-7a51aed64375/Untitled.png)
+<p align='center'>
+<img width = '600px' src='https://bl3302files.storage.live.com/y4mEkzN-1LY_AUNFLwaarlNw2zdZB-ZjMAp_IJ1f0aBkpLUcVWkOsILGgEO1jxxAI5pjafxlYeJ8r7XA6VFQWhU1c3IV8JAOwCkQPfkfM2YKG7UWnR0Ip2pEsFQreImMPjBZXlHP_gf-XsARJCrEZbHqy_8be1xy4UEmU8kORWSXMPvjb25EYKwTj14tNlrPLCX?width=1650&height=350&cropmode=none'>
+</p>
 
 함수가 실행되려면 함수 실행 컨텍스트가 실행 컨텍스트 스택에 푸시되어야 한다. 함수가 호출된 순서대로 실행되는 이유는 함수가 호출된 순서대로 실행 컨텍스트 스택에 푸시되기 때문이다. 이처럼 함수의 실행 순서는 실행 컨텍스트 스택으로 관리한다.
 
@@ -81,7 +83,9 @@ bar(); // bar 호출 -> 3초 후 foo 호출
 
 이벤트 루프는 브라우저에 내장되어 있는 기능 중 하나다.
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/92f2a69c-9c9d-4b3a-a88f-122b4e55256b/Untitled.png)
+<p align='center'>
+<img width = '600px' src='https://bl3302files.storage.live.com/y4mU1dbKEM_NsG9juLiPRf8FThexGqhtBsBD2Ric-CfsFEduv7pkJC5L9x-Sj-2KRtPNtJXATTj3hL5_10dr8Glpkx1Qi_pzJ9HmEvugC2-xjTp2Fu8vdOvIqNLvF4K-ei_o7xUhkugeo-zK5Wtnrs4G3Aq_qHe36X65RgnR8mTTzn10ZaEb625H1LAwwQoYHFC?width=598&height=456&cropmode=none'>
+</p>
 
 대부분의 자바스크립트 엔진은 크게 2개의 영역으로 구분할 수 있다.
 
@@ -106,4 +110,42 @@ bar(); // bar 호출 -> 3초 후 foo 호출
 
 예를 들어 `setTimeout` 의 콜백 함수의 평가와 실행은 자바스크립트 엔진이 담당하지만 호출 스케줄링을 위한 타이머 설정과 콜백 함수의 등록은 브라우저 또는 Node.js가 담당한다. 이를 위해 브라우저 환경은 태스크 큐와 이벤트 루프를 제공한다.
 
-111
+- 태스크 큐(task queue / event queue / callback queue)
+    
+    `setTimeout` 이나 `setInterval` 같은 비동기 함수의 콜백 함수 또는 이벤트 핸들러가 일시적으로 보관되는 영역이다. 태스크 큐와는 별도로 프로미스의 후속 처리 메서드의 콜백 함수가 일시적으로 보관되는 마이크로태스크 큐도 존재한다.(45장)
+    
+- 이벤트 루프
+    
+    콜 스택에 현재 실행 중인 실행 컨텍스트가 있는지, 그리고 태스크 큐에 대기 중인 함수가 있는지 반복해서 확인한다. 만약 **콜 스택이 비어 있고 태스크 큐에 대기 중인 함수가 있다면 이벤트 루프는 순차적으로 태스트 큐에 대기 중인 함수를 콜 스택으로 이동시킨다.** 이때 콜 스택으로 이동한 함수는 실행된다. 
+    
+
+```jsx
+function foo() {
+	console.log('foo');
+}
+
+function bar() {
+	console.log('bar');
+}
+
+setTimeout(foo, 0); // 0초 (실제는 4ms) 후에 foo 함수가 호출된다.
+bar();
+```
+
+1. 전역 코드가 평가되어 전역 실행 컨텍스트가 생성되고 콜 스택에 푸시된다.
+2. `setTimeout` 함수가 호출된다. 이때 `setTimeout` 함수의 함수 실행 컨텍스트가 콜 스택에 푸시되어 현재 실행 중인 실행 컨텍스트가 된다.
+3. `setTimeout` 함수가 실행되면 콜백 함수를 호출 스케줄링하고 종료되어 콜 스택에서 팝된다. 이때 호출 스케줄링, 즉 타이머 설정과 타이머가 만료되면 콜백 함수를 태스크 큐에 푸시하는 것은 브라우저의 역할이다.
+4. 브라우저가 수행하는 4-1과 자바스크립트 엔진이 수행하는 4-2는 병행 처리된다.
+    
+    4-1. 브라우저는 타이머를 설정하고 타이머의 만료를 기다린다. 타이머가 만료되면 콜백 함수 `foo`가 태스크 큐에 푸시된다. 위 예제의 경우 지연 시간이 0 이지만 지연 시간이 4ms 이하인 경우 최소 지연 시간 4ms가 지정된다.
+    
+    따라서 4ms 후에 콜백 함수 `foo` 가 태스크 큐에 푸시되어 대기하게 된다.
+    
+    4-2. `bar` 함수가 호출되어 `bar` 함수의 실행 컨텍스트가 생성되고 콜 스택에 푸시되어 현재 실행 중인 실행 컨텍스트가 된다. 이때 브라우저가 타이머를 설정한 후 4ms가 경과했다면 `foo` 함수는 아직 태스크 큐에서 대기 중이다. 이후 `bar` 함수가 종료되어 콜 스택에서 팝된다.
+    
+5. 전역 실행이 종료되고 전역 실행 컨텍스트가 콜 스택에서 팝된다. 이제 아무런 실행 컨텍스트도 존재하지 않게 된다.
+6. 이벤트 루프에 의해 콜 스택이 비어 있음이 감지되고 태스크 큐에서 대기 중인 `foo` 가 이벤트 루프에 의해 콜 스택에 푸시된다. 즉, `foo` 함수 실행 컨텍스트가 생성되어 콜 스택에 푸시되어 현재 실행 중인 실행 컨텍스트가 된다.
+
+이처럼 **비동기 함수인 `setTimeout` 의 콜백 함수는 태스크 큐에서 대기하다가 콜 스택이 비게 되면, 다시 말해 전역 코드 및 호출된 함수가 모두 종료하면 비로소 콜 스택에 푸시되어 실행된다.**
+
+**자바스크립트 엔진은 싱글 스레드 이지만 브라우저는 멀티 스레드로 동작한다.**
