@@ -112,7 +112,7 @@ const todos = [
 const [,{id}] = todos;
 console.log(id);//2
 ```
-- 중첩 객체의 경우 다음과 같으 사용.
+- 중첩 객체의 경우 다음과 같이 사용.
 ```jsx
 const user = {
     name:'Lee',
