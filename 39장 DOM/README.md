@@ -4,6 +4,8 @@ DOM 조작은 새로운 노드를 생성하여 DOM에 추가하거나 기존 노
 
 DOM 조작은 리플로우와 리페인트를 발생시켜 성능에 영향을 주므로 최적화를 위해 주의해서 다루어야 한다.
 
+<br/>
+
 ## 39.6.1 innerHTML
 
 `Element.prototype.innerHTML` 프로퍼티는 요소 노드의 HTML 마크업을 취득하거나 변경한다. 
@@ -18,7 +20,7 @@ DOM 조작은 리플로우와 리페인트를 발생시켜 성능에 영향을 �
 
 HTML5는 `innerHTML` 프로퍼티로 삽입된 `script` 요소 내의 자바스크립트 코드를 실행하지 않는다. 하지만 `script` 요소 없이도 크로스 사이트 스크립팅 공격은 가능하다.
 
-예제) [https://codepen.io/4anghyeon/pen/jOYdJoj](https://codepen.io/4anghyeon/pen/jOYdJoj)
+[https://codepen.io/4anghyeon/pen/jOYdJoj](https://codepen.io/4anghyeon/pen/jOYdJoj)
 
 `innerHTML` 프로퍼티의 또 다른 단점은 HTML 마크업 문자열을 할당하는 경우 요소 노드의 모든 자식 노드를 제거하고 DOM을 변경한다는 것이다.
 
@@ -45,13 +47,18 @@ HTML5는 `innerHTML` 프로퍼티로 삽입된 `script` 요소 내의 자바스�
 
 따라서 `innerHTML` 프로퍼티는 복잡하지 않은 요소를 추가할 때만 유용하다.
 
+<br/>
+
+
 ## 39.6.2 insertAdjacentHTML 메서드
 
 `Element.prototype.insertAdjacentHTML(position, DOMString)` 메서드는 기존 요소를 제거하지 않으면서 위치를 지정해 새로운 요소를 삽입한다.
 
 첫 번째 인수로 전달할 수 있는 위치를 뜻하는 문자열은 ‘beforebegin’, ‘aft erbegin’, beforeend’, ‘afterend’ 4가지다.
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/c5f62d1f-30b5-49e8-8d04-08bbeddd1732/Untitled.png)
+<p align='center'>
+<img width = '.00px' src='https://bl3302files.storage.live.com/y4mT3eGKM5AMYN_sJ86-LQkW46LlTW5HDLmigQFtJh8IBG9FSl-Nzropr2x_ntJhAY5RZy4hr4fw1oUXMqnI1DAQCfg3Oq0pthHHehAm9EE9ga-VAazmPmSeEMULtIORLOyUWNoIlt7UjMkH5jLbGzLkUi8bdHLbbPj7b5sdI1crCz4m-Quo4jaaDBx4uHHuK7v?width=360&height=230&cropmode=none'>
+</p>
 
 [https://codepen.io/4anghyeon/pen/XWVOQpp](https://codepen.io/4anghyeon/pen/XWVOQpp)
 
@@ -59,9 +66,15 @@ HTML5는 `innerHTML` 프로퍼티로 삽입된 `script` 요소 내의 자바스�
 
 하지만 크로스 사이트 스크립팅 공격에 취약하다는 점은 동일하다.
 
+<br/>
+
+
 ## 39.6.3 노드 생성과 추가
 
 DOM은 노드를 직접 생성/삽입/삭제/치환하는 메서드도 제공한다.
+
+<br/>
+
 
 ### 요소 노드 생성
 
@@ -110,6 +123,9 @@ $fruits.appendChild($li);
 [https://codepen.io/4anghyeon/pen/XWVOQvZ](https://codepen.io/4anghyeon/pen/XWVOQvZ)
 
 이 과정에서 비로소 새로 생성한 요소 노드가 DOM에 추가된다. 요소 노드를 생성하여 DOM에 한 번 추가하므로 DOM은 한 번만 변경된다.  이때 리플로우와 리페인트가 실행된다.
+
+<br/>
+
 
 ## 39.6.4 복수의 노드 생성과 추가
 
@@ -183,7 +199,9 @@ $fruits.appendChild($li);
 
 `DocumentFragment`는 기존 DOM과 별도로 존재하므로 `DocumentFragment` 노드에 자식을 추가하여도 기존 DOM에는 어떠한 변경도 발생하지 않는다. 또한 `DocumentFragment` 노드를 DOM에 추가하면 자신은 제거되고 자신의 자식 노드만 DOM에 추가된다. 
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/6da2ad8a-cd38-465d-97af-e12c8df1cb14/Untitled.png)
+<p align='center'>
+<img width = '500px' src='https://bl3302files.storage.live.com/y4m2pHKRxCiIdb98R-ovGLZSRJgb0ofbDLVn0tWQpmEovSeLjsdVnBpbaYxL81qinfX_DZIau2EEyXS0GP4u-0f-kjx8xEdrYOKsEYTGjqLeUiRTciX4pfP1Pw2s6vHxT79hygCgbd3BuyrTXBDg9Yc1KWbceSQSo-y7NPVBKvjhXTa111i4tXF8W3ruS89HsG1?width=1060&height=302&cropmode=none'>
+</p>
 
 `Document.prototype.createDocumentFragment` 메서드는 비어 있는 `DocumentFragment` 노드를 생성하여 반환한다. 위 예제에서 컨테이너를 `DocumentFragment` 로 바꿔주기만 하면 된다.
 
@@ -271,7 +289,9 @@ HML 요소는 여러 개의 어트리뷰트를 가질 수 있다.
 
 모든 어트리뷰트 노드의 참조는 유사 배열 객체이자 이터러블인 `NamedNodeMap` 객체에 담겨서 요소 노드의 `attributes` 프로퍼티에 저장된다.
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/79be723e-cd92-48ff-aa1f-78883f57ed06/Untitled.png)
+<p align='center'>
+<img width = '500px' src='https://bl3302files.storage.live.com/y4m4HtMsgXTufNjrFHil8aYgJ9b88MJFI3exgdh-J56GMdSi0yr2kZ3h7co-8uTcTtQaihS6SqlcOh2Hv_BOVg2Sd7OgIsjlBebEZZXlSK5fGd4TH4xPaXYAjfSWd4O3cO99aW7lH8tlZ_fFdj7NauJ8f1RPEz8kDMIQPQEtGxifoaB_F40JOoXq7GbMOp_IDoa?width=1252&height=416&cropmode=none'>
+</p>
 
 `attributes` 프로퍼티는 읽기 전용 접근자 프로퍼티이며, `NameNodeMap` 객체를 반환한다.
 
@@ -327,7 +347,9 @@ HML 요소는 여러 개의 어트리뷰트를 가질 수 있다.
 
 요소 노드 객체에는 HTML 어트리뷰트에 대응하는 프로퍼티(DOM 프로퍼티)가 존재한다. 이 DOM 프로퍼티들은 HTML 어트리뷰트 값을 초기값으로 가지고 있다.
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/1b6ee86c-f11f-4157-9328-4f16e1b6216c/Untitled.png)
+<p align='center'>
+<img width = '500px' src='https://bl3302files.storage.live.com/y4mgsXhtOpCTNDktLwU3OUJ3eRyXxJFNi949_JyaaHZYq8w6ebEKrmOWC1YmKn4cfYhbGvVVw5PVS6Xd4Xq_tdGOFVk_2a3xnsQVj8GfgP87s0TAAeTDNvt1nhOQT_WHthso6NQX6KaPz_Lm51AcI1dLTvSzCNN2NgV_LNz8-qqZKgfKGSMGDeJvUVrGWu4tgFB?width=1058&height=174&cropmode=none'>
+</p>
 
 DOM 프로퍼티는 getter와 setter 모두 존재하므로 DOM 프로퍼티는 참조와 변경이 가능하다. 이처럼 HTML 어트리뷰트는 DOM에서 중복 관리되는 것처럼 보인다. 하지만 그렇지 않다.
 
@@ -366,3 +388,153 @@ DOM 프로퍼티는 getter와 setter 모두 존재하므로 DOM 프로퍼티는 
 ### DOM 프로퍼티 값의 타입
 
 `getAttribute` 메서드로 취득한 어트리뷰트 값은 언제나 문자열이다. 하지만 DOM 프로퍼티로 취득한 값은 문자열이 아닐 수도 있다. 예를 들어, `checked` 어트리뷰트 값은 문자열이지만 값은 불리언 타입이다.
+
+## 39.7.4 data 어트리뷰트와 dataset 프로퍼티
+
+`data` 어트리뷰트와 `dataset` 프로퍼티를 사용하면 HTML 요소에 정의한 사용자 정의 어트리뷰트와 자바스크립트 간에 데이터 교환을 할 수 있다.
+
+`data` 어트리뷰트는 `data-user-id`, `data-role` 과 같이 `data-` 접두사 다음에 임의의 이름을 붙여 사용한다.
+
+`data` 어트리뷰트의 값은 `HTMLElement.dataset` 프로퍼티로 취득할 수 있다. `dataset` 프로퍼티는 `data` 어트리뷰트의 정보를 제공하는 `DOMStringMap` 객체를 반환한다. `DOMStringMap` 객체는 `data-` 접두사 다음에 붙인 임의의 이름을 카멜 케이스로 변환한 프로퍼티를 가지고 있다. 이를 통해 값을 취득하거나 변경할 수 있다. 
+
+[https://codepen.io/4anghyeon/pen/GRyzbaG](https://codepen.io/4anghyeon/pen/GRyzbaG)
+
+존재하지 않는 키를 `dataset` 프로퍼티에 값을 할당하면 HTML 요소에 `data` 어트리뷰트가 추가된다. 이때 `dataset` 프로퍼티에 추가한 카멜케이스의 프로퍼티 키는 `data-` 접두사 다음에 케밥케이스(data-foo-bar)로 자동 변경되어 추가된다.
+
+```html
+<!DOCTYPE html>
+<html>
+<body>
+  <ul class="users">
+    <li id="1" data-user-id="7621">Lee</li>
+    <li id="2" data-user-id="9524">Kim</li>
+  </ul>
+  <script>
+    const users = [...document.querySelector('.users').children];
+
+    // user-id가 '7621'인 요소 노드를 취득한다.
+    const user = users.find(user => user.dataset.userId === '7621');
+
+    // user-id가 '7621'인 요소 노드에 새로운 data 어트리뷰트를 추가한다.
+    user.dataset.role = 'admin';
+    console.log(user.dataset);
+    /*
+    DOMStringMap {userId: "7621", role: "admin"}
+    -> <li id="1" data-user-id="7621" data-role="admin">Lee</li>
+    */
+  </script>
+</body>
+</html>
+```
+<br/>
+
+
+# 39.8 스타일
+
+## 39.8.1 인라인 스타일 조작
+
+`HTMLElement.prototype.style` 프로퍼티는 요소 노드의 인라인 스타일을 취득하거나 추가 또는 변경한다.
+
+[https://codepen.io/4anghyeon/pen/XWVOvmj](https://codepen.io/4anghyeon/pen/XWVOvmj)
+
+`style` 프로퍼티를 참조하면 `CSSStyleDeclaration` 타입의 객체를 반환한다. 이 객체는 다양한 CSS 프로퍼티에 대응하는 프로퍼티를 가지고 있다. CSS 프로퍼티는 케밥 케이스를 따른다. 이에 대응하는 `CSSStyleDeclaration` 객체의 프로퍼티는 카멜케이스를 따른다. 예를 들어 CSS 프로퍼티 `background-color` 에 대응하는 `CSSStyleDeclaration` 객체의 프로퍼티는 `backgroundColor` 이다.
+
+<br/>
+
+
+## 39.8.2 클래스 조작
+
+`class` 어트리뷰트에 대응하는 DOM 프로퍼티는 `className`과 `classList`이다. 자바스크립트에서 `class`는 예약어이기 때문이다.
+<br/>
+
+
+### className
+
+`Element.prototype.className` 프로퍼티는 HTML 요소의 `class` 어트리뷰트 값을 취득하거나 변경한다. `className` 프로퍼티는 문자열을 반환하므로 공백으로 구분된 여러 개의 클래스를 반환하는 경우 다루기 불편하다.
+
+[https://codepen.io/4anghyeon/pen/GRyzVrw](https://codepen.io/4anghyeon/pen/GRyzVrw)
+
+<br/>
+
+
+### classList
+
+`Element.prototype.classList` 프로퍼티는 `class` 어트리뷰트의 정보를 담은 `DOMTokenList` 객체를 반환한다.
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    .box {
+      width: 100px; height: 100px;
+      background-color: antiquewhite;
+    }
+    .red { color: red; }
+    .blue { color: blue; }
+  </style>
+</head>
+<body>
+  <div class="box red">Hello World</div>
+  <script>
+    const $box = document.querySelector('.box');
+
+    // .box 요소의 class 어트리뷰트 정보를 담은 DOMTokenList 객체를 취득
+    // classList가 반환하는 DOMTokenList 객체는 HTMLCollection과 NodeList와 같이
+    // 노드 객체의 상태 변화를 실시간으로 반영하는 살아 있는(live) 객체다.
+    console.log($box.classList);
+    // DOMTokenList(2) [length: 2, value: "box blue", 0: "box", 1: "blue"]
+
+    // .box 요소의 class 어트리뷰트 값 중에서 'red'만 'blue'로 변경
+    $box.classList.replace('red', 'blue');
+  </script>
+</body>
+</html>
+```
+
+`DOMTokenList` 객체는 유사 배열 객체이면서 이터러블이다. `DOMTokenList` 객체는 다음과 같은 유용한 메서드를 제공한다.
+
+- add(... className)
+    
+    인수로 전달한 1개 이상의 문자열을 `class` 어트리뷰트 값으로 추가한다.
+    
+- remove(... className)
+    
+    인수로 전달한 1개 이상의 문자열과 일치하는 클래스를 `class` 어트리뷰트에서 제거한다.
+    
+- item(index)
+    
+    인수로 전달한 index에 해당하는 클래스를 `class` 어트리뷰트에서 반환한다.
+    
+- contains(className)
+    
+    인수로 전달한 문자열과 일치하는 클래스가 `class` 어트리뷰트에 포함되어 있는지 확인한다.
+    
+- replace(oldClassName, newClassName)
+    
+    `class` 어트리뷰트에서 첫 번째 인수로 전달한 문자열을 두 번째 인수로 전달한 문자열로 변경한다.
+    
+- toggle(className[,force])
+    
+    `class` 어트리뷰트에 인수로 전달한 문자열과 일치하는 클래스가 존재하면 제거하고, 존재하지 않으면 추가한다.
+    
+    두 번째 인수로 불리언 값으로 평가되는 조건식을 전달할 수 있다. 조건식이 참이면 `class` 어트리뷰트에 강제로 첫 번째 인수로 전달받은 문자열을 추가하고, `false`면 강제로 제거한다.
+    
+
+## 39.8.3 요소에 적용되어 있는 CSS 스타일 참조
+
+`style` 프로퍼티는 인라인 스타일만 반환한다. 따라서 클래스를 적용한 스타일이나 상속을 통해 암묵적으로 적용된 스타일등 모든 CSS 스타일을 참조하려면 `getComputedStyle` 메서드를 사용한다.
+
+`window.getComputedStyle(element[, pseudo])` 메서드는 첫 번째 인수로 전달한 노드에 적용되어 있는 모든 스타일을 `CSSStyleDeclaration` 객체에 담아 반환한다.
+
+두 번째 인수로 `:after` , `:before` 와 같은 의사 요소를 지정하는 문자열을 전달할 수 있다.
+
+<br/>
+<br/>
+
+
+# 39.9 DOM 표준
+
+HTML과 DOM 표준은 W3C과 WHATWG 라는 두 단체가 협력하면서 공통된 표준을 만들어 왔다.
+
+그런데 두 단체가 서로 다른 결과물을 내놓기 시작하면서 2018년 4월 구글, 애플, 마이크로소프트, 모질라로 구성된 4개의 주류 브라우저 벤더사가 주도하는 WHATWG이 단일 표준을 내놓기로 두 단체가 합의했다.
