@@ -186,33 +186,6 @@
 ```
 
 ### 39.2.4 CSS 선택자를 이용한 요소 노드 취득
-```css
-/* 전체 선택자 : 모든 요소를 선택 */
-*{...}
-
-p{...}
-
-#foo{...}
-
-.foo{...}
-
-/* 어트리뷰트 선택자 : input 요소 중에 type 어트리뷰트 값이 'text'인 요소를 모두 선택 */
-input[type=text]{...}
-
-/* 후손 선택자 */
-div p{...}
-
-/* 자식 선택자 */
-div > p{...}
-
-/* 인접 형제 선택자 */
-p + ul{...}
-
-/* 일반 형제 선택자 */
-p ~ ul {...}
-
-```
-
 - `Document.prototype.querySelector`/`Element.prototype.querySelector`
 - 인수로 전달한 CSS 선택자를 만족시키는 하나의 요소 노드를 탐색하여 반환
 ```html
@@ -236,3 +209,150 @@ p ~ ul {...}
 - 여러 개의 요소 노드 객체를 갖는 DOM 컬렉션 객체인 NodeList 객체를 반환한다.
 - NodeList 객체는 유사 배열 객체이면서 이터러블이다.
 
+```html
+<body>
+    <ul>
+        <li class="fruit apple">Apple</li>
+        <li class="fruit banana">Banana</li>
+        <li class="fruit orange">Orange</li>
+    </ul>
+
+    <script>
+        const $elems = document.querySelectorAll('ul>li');
+        console.log($elems)
+
+        $elems.forEach(el => el.style.color='red');
+    </script>
+</body
+```
+- `getElementById`, `getElementsByTagName`, `getElementsByClassName` 메서드들보다 CSS 선택자 문법을 사용하는 `querySelector`, `querySelectorAll` 메서드 사용을 더 권장하고 있다.
+- 속도는 느리나 CSS 선택자 문법으로 좀 더 구체적인 조건과 일관된 방식으로 요소 노드를 취득할 수 있기 때문.
+
+### 39.2.5 특정 요소 노드를 취득할 수 있는지 확인
+- `Element.prototype.matches` 메서드는 인수로 전달한 CSS 선택자를 통해 특정 요소 노드를 취득할 수 있는지 확인.
+
+```html
+<body>
+    <ul id="fruits">
+        <li class="apple">Apple</li>
+        <li class="banana">Banana</li>
+        <li class="orange">Orange</li>
+    </ul>
+
+    <script>
+        const $apple = document.querySelector('.apple');
+
+        console.log($apple.matches('#fruits > li.apple'));//true
+        console.log($apple.matches('#fruits>li.banana'));//false
+    </script>
+</body>
+```
+
+### 39.2.6 HTMLCollection과 NodeList
+- DOM 컬렉션 객체인 HTMLCollection과 NodeList는 DOM API가 여러 개의 결과값을 반환하기 위한 DOM 컬렉션 객체다.
+- HTMLCollection과 NodeList는 모두 유사 배열 객체이면서 이터러블이다.
+
+#### **HTMLCollection**
+- getElementsByTagName, getElementsByClassName 메서드가 반환하는 HTMLCollection 객체는
+- 노드 객체의 상태 변화를 실시간으로 반영하는 살아 있는 DOM 컬렉션이다.
+
+```html
+<body>
+    <ul id="fruits">
+        <li class="red">Apple</li>
+        <li class="red">Banana</li>
+        <li class="red">Orange</li>
+    </ul>
+
+    <script>
+        const $elems = document.getElementsByClassName('red');
+
+        console.log($elems);//HTMLCollection(3) [li.red, li.red, li.red]
+
+        for(let i=0; i<$elems.length; i++){
+            $elems[i].className = 'blue';
+        }
+        console.log($elems) //HTMLCollection [li.red]
+        
+    </script>
+</body>
+```
+<p align="center"><img src="./img/js-39-6.jpg" width="60%"></p>
+- HTMLCollection 객체는 실시간으로 노드 객체의 상태 변경을 반영하여 요소를 제거할 수 있기 때문에 HTMLCollection 객체를 for 문으로 순회하면서 노드 객체의 상태를 변경해야 할 때 주의해야 한다.
+- 해결책은 HTMLCollection 객체를 사용하지 않거나 배열로 변환하여 배열 고차함수를 사용할 수 있다.
+
+#### **NodeList**
+- HTMLCollection 객체의 부작용을 해결하기 위해 querySelectorAll 메서드를 사용하는 방법도 있다.
+- querySelectorAll 메서드는 NodeList 객체를 반환하며 실시간으로 노드 객체의 상태 변경을 하지않는다.
+```html
+<body>
+    <ul id="fruits">
+        <li class="red">Apple</li>
+        <li class="red">Banana</li>
+        <li class="red">Orange</li>
+    </ul>
+
+    <script>
+        const $elems = document.querySelectorAll('.red');
+
+        console.log($elems);//NodeList(3) [li.red, li.red, li.red]
+
+        for(let i=0; i<$elems.length; i++){
+            $elems[i].className = 'blue';
+        }
+        console.log($elems) //NodeList(3) [li.blue, li.blue, li.blue]
+        
+    </script>
+</body>
+```
+- 노드 객체의 상태 변경과 상관없이 안전하게 DOM 컬렉션을 사용하려면 HTMLCollection이나 NodeList 객체를 배열로 변환하여 사용하는 것을 권장한다.
+
+## 39.3 노드 탐색
+### 39.3.1 공백 텍스트 노드
+- HTML 요소 사이의 스페이스, 탭, 줄바꿈 등의 공백 문자는 텍스트 노드를 생성한다. 이를 공백 텍스트 노드라 한다.
+
+### 39.3.2 자식 노드 탐색
+|프로퍼티|설명|
+|:---:|:---:|
+|Node.prototype.childNodes||
+
+
+
+
+## 39.5 요소 노드의 텍스트 조작
+### 39.5.1 nodeValue
+- 텍스트 노드의 텍스트 값을 반환한다.
+- 따라서 문서 노드나, 요소 노드의 nodeValue 프로퍼티를 참조하면 null을 반환한다.
+
+```html
+<body>
+    <div id="foo">Hello</div>
+
+    <script>
+        //문서 노드
+        console.log(document.nodeValue); //null
+
+        //요소 노드
+        const $foo = document.getElementById('foo');
+        console.log($foo.nodeValue); //null
+
+        //텍스트 노드는 요소 노드의 자식노드이기때문에
+        //요소 노드에서 firstChild 프로퍼티를 사용하여 탐색한 뒤
+        //텍스트 노드를 취득한다.
+        const $textNode = $foo.firstChild;
+        console.log($textNode.nodeValue); //Hello
+    </script>
+</body>
+```
+
+### 39.5.2 textContent
+- 요소 노드 textContent 프로퍼티를 참조하면 요소 노드의 콘텐츠 영역 내의 텍스트를 모두 반환한다.
+- 이때 HTML 마크업은 무시된다.
+- nodeValue 프로퍼티 코드보다 간단하다.
+```html
+    <div id="foo">Hello <span>World!</span></div>
+
+    <script>
+        console.log(document.getElementById('foo').textContent); //Hello World!
+    </script>
+```
