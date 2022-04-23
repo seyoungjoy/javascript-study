@@ -308,16 +308,97 @@
 - 노드 객체의 상태 변경과 상관없이 안전하게 DOM 컬렉션을 사용하려면 HTMLCollection이나 NodeList 객체를 배열로 변환하여 사용하는 것을 권장한다.
 
 ## 39.3 노드 탐색
+- 요소 노드를 취득한 다음, 취득한 요소 노드를 기점으로 DOM 트리의 노드를 옮겨 다니며 부모, 형제 노드 등을 탐색할 수 있다.
+- DOM 트리 상의 노드를 탐색할 수 있도록 Node, Element 인터페이스는 트리 탐색 프로퍼티를 제공한다.
+- Node.prototype : parentNode, previousSibling, firstChild, childNodes
+- Element.prototype : previousElementSibling, nextElementSibling, children
+<p align="center"><img src="./img/js-39-7.jpg" width="60%"></p>
+- 노드 탐색 프로퍼티는 setter 없이 getter만 존재하여 참조만 가능한 읽기 전용 접근자 프로퍼티다.
+<p align="center"><img src="./img/js-39-8.jpg" width="60%"></p>
+
+
 ### 39.3.1 공백 텍스트 노드
 - HTML 요소 사이의 스페이스, 탭, 줄바꿈 등의 공백 문자는 텍스트 노드를 생성한다. 이를 공백 텍스트 노드라 한다.
+- 노드를 탐색할 때 공백 문자가 생성한 공백 텍스트 노드에 주의해야 한다.
+```html
+<ul id="fruits">
+    <li class="apple">Apple</li>
+    <li class="banana">Banana</li>
+    <li class="orange">Orange</li>
+</ul>
+```
+<p align="center"><img src="./img/js-39-9.jpg" width="60%"></p>
 
 ### 39.3.2 자식 노드 탐색
+
 |프로퍼티|설명|
-|:---:|:---:|
-|Node.prototype.childNodes||
+|:---:|:---|
+|Node.prototype.childNodes|- 자식 노드를 모두 탐색하여 DOM 컬렉션 객체인 NodeList에 담아 반환한다.<br> - childeNodes 프로퍼티가 반환한 NodeList에는 요소 노드뿐만 아니라 텍스트 노드도 포함되어 있을 수 있다.|
+|Element.prototype.children|- 자식 요소 중에서 노드만 모두 탐색하여 DOM 컬렉션 객체인 HTMLCollection에 담아 반환한다.<br> - children 프로퍼티가 반환한 HTMLCollection에는 텍스트 노드가 포함되지 않는다.|
+|Node.prototype.firstChild|첫 번째 자식 노드를 반환한다. firstChild 프로퍼티가 반환한 노드는 텍스트 노드이거나 요소 노드다.|
+|Node.prototype.lastChild|- 마지막 자식 노드를 반환한다.<br> - 반환한 노드는 텍스트 노드이거나 요소 노드다.|
+|Element.prototype.firstElementChild|- 첫 번째 자식 요소 노드를 반환한다.<br> - firstElementChild 프로퍼티는 요소 노드만 반환한다.|
+|Element.prototype.lastElementChild|- 마지막 자식 요소 노드를 반환한다.<br> - lastElementChild 프로퍼티는 요소 노드만 반환한다.|
 
+### 39.3.3 자식 노드 존재 확인
+- `Node.prototype.hasChildNodes` 메서드를 사용한다.
+- 자식 노드가 존재하면 true, 자식 노드가 존재하지 않으면 false를 반환한다.
+- 자식 노드 중에 텍스트 노드가 아닌 요소 노드가 존재하는지 확인하려면 `children.length` 또는 Element 인터페이스의 `childElementCount` 프로퍼티를 사용한다.
+```html
+    <ul id="fruits"></ul>
+    <script>
+        const $fruits = document.getElementById('fruits');
+        
+        // hasChildNodes 메서드는 텍스트 노드를 포함하여 자식 노드의 존재를 확인
+        console.log($fruits.hasChildNodes());
 
+        //자식 노드 중에 텍스트 노드가 아닌 요소 노드가 존재하는지 확인한다.
+        console.log(!!$fruits.children.length);
+        console.log(!!$fruits.childElementCount);
 
+    </script>
+```
+
+### 39.3.4 요소 노드의 텍스트 노드 탐색
+- 요소 노드의 텍스트 노드는 요소 노드의 자식 노드이기 때문에 firstChild 프로퍼티로 접근할 수 있다.
+```html
+    <ul id="foo">Hello</ul>
+    <script>
+        console.log(document.getElementById('foo').firstChild); //#text
+
+    </script>
+```
+
+### 39.3.5 부모 노드 탐색
+- `Node.prototype.parentNode` 프로퍼티를 사용한다.
+```html
+    <ul id="fruits">
+        <li class="apple">Apple</li>
+        <li class="banana">Banana</li>
+        <li class="orange">Orange</li>
+    </ul>
+    <script>
+        const $banana = document.querySelector('.banana');
+
+        console.log($banana.parentNode); //ul#fruits
+    </script>
+```
+
+### 39.3.6 형제 노드 탐색
+- 부모 노드가 같은 형제 노드를 탐색하려면 다음과 같은 노드 탐색 프로퍼티를 사용한다.
+
+|프로퍼티|설명|
+|:---:|:---|
+|Node.prototype.previousSibling|- 형제 노드 중에서 이전 형제 노드를 탐색하여 반환<br> - 요소 노드, 텍스트 노드 반환|
+|Node.prototype.nextSibling|- 형제 노드 중에서 자신의 다음 형제 노드를 탐색하여 반환<br> - 요소 노드, 텍스트 노드 반환|
+|Element.prototype.previousElementSibling|형제 요소 노드 중에서 자신의 이전 형제 요소 노드를 탐색하여 반환한다.<br> - 요소 노드만 반환|
+|Element.prototype.nextElementSibling|형제 요소 노드 중에서 자신의 다음 형제 요소 노드를 탐색하여 반환한다.<br> - 요소 노드만 반환|
+
+## 39.4 노드 정보 취득
+|프로퍼티|설명|
+|:---:|:---|
+|Node.prototype.nodeType|노드 객체의 종류, 즉 노드 타입을 나타내는 상수를 반환한다. 노드 타입 상수는 Node에 정의되어 있다.|
+|Node.prototype.nodeName|노드의 이름을 문자열로 반환한다.|
 
 ## 39.5 요소 노드의 텍스트 조작
 ### 39.5.1 nodeValue
