@@ -67,7 +67,7 @@
 - DOM을 구성하는 노드 객체는 ECMAScript 사양에 정의된 표준 빌트인 객체가 아니라 브라우저 환경에서 추가적으로 제공하는 호스트 객체다.
 - 하지만 노드 객체도 자바스크립트 객체이므로 프로토타입에 의한 상속 구조를 갖는다. 
 
-<p align="center"><img src="./img/js-39-4.jpg" width="60%"></p>
+<p align="center"><img src="./img/js-39-4.jpg" width="70%"></p>
 
 - 모든 노드 객체는 Object, EventTarget, Node 인터페이스를 상속받는다.
 - 문서 노드는 Document, HTMLDocument 인터페이스를 상속받고
@@ -75,7 +75,7 @@
 - 텍스트 노드는 CharacterData 인터페이스를 상속받는다.
 - 요소 노드는 Element 인터페이스를 상속받고 HTMLElement와 태그의 종류별로 세분화된 인터페이스를 상속받는다.
 
-<p align="center"><img src="./img/js-39-5.jpg" width="60%"></p>
+<p align="center"><img src="./img/js-39-5.jpg" width="70%"></p>
 
 - input 요소 노드 객체는 다양한 특성을 갖는 객체이며, 이러한 특성을 나타내는 기능들을 상속을 통해 제공받는다.
 
@@ -340,6 +340,37 @@
 |Element.prototype.firstElementChild|- 첫 번째 자식 요소 노드를 반환한다.<br> - firstElementChild 프로퍼티는 요소 노드만 반환한다.|
 |Element.prototype.lastElementChild|- 마지막 자식 요소 노드를 반환한다.<br> - lastElementChild 프로퍼티는 요소 노드만 반환한다.|
 
+```html
+<ul id="fruits">
+    <li class="apple">Apple</li>
+    <li class="banana">Banana</li>
+    <li class="orange">Orange</li>
+</ul>
+<script>
+    const $fruits = document.getElementById('fruits');
+
+    console.log($fruits.childNodes);
+    //NodeList(7) [text, li.apple, text, li.banana, text, li.orange, text]
+    
+    console.log($fruits.children);
+    //HTMLCollection(3) [li.apple, li.banana, li.orange]
+
+    console.log($fruits.firstChild);
+    //#text
+    
+    console.log($fruits.lastChild);
+    //#text
+    
+    console.log($fruits.firstElementChild);
+    //li.apple
+
+    console.log($fruits.lastElementChild);
+    //li.orange
+
+</script>
+```
+
+
 ### 39.3.3 자식 노드 존재 확인
 - `Node.prototype.hasChildNodes` 메서드를 사용한다.
 - 자식 노드가 존재하면 true, 자식 노드가 존재하지 않으면 false를 반환한다.
@@ -393,6 +424,36 @@
 |Node.prototype.nextSibling|- 형제 노드 중에서 자신의 다음 형제 노드를 탐색하여 반환<br> - 요소 노드, 텍스트 노드 반환|
 |Element.prototype.previousElementSibling|형제 요소 노드 중에서 자신의 이전 형제 요소 노드를 탐색하여 반환한다.<br> - 요소 노드만 반환|
 |Element.prototype.nextElementSibling|형제 요소 노드 중에서 자신의 다음 형제 요소 노드를 탐색하여 반환한다.<br> - 요소 노드만 반환|
+
+```html
+<ul id="fruits">
+
+    <li class="apple">Apple</li>
+    <li class="banana">Banana</li>
+    <li class="orange">Orange</li>
+</ul>
+<script>
+    const $fruits = document.getElementById('fruits');
+
+    const {firstChild} = $fruits;
+    console.log(firstChild);//#text
+
+    const {nextSibling} = firstChild;
+    console.log(nextSibling); //li.apple
+
+    const {previousSibling} = nextSibling;
+    console.log(previousSibling); //#text
+
+    const {firstElementChild} = $fruits;
+    console.log(firstElementChild);//li.apple
+
+    const {nextElementSibling} = firstElementChild;
+    console.log(nextElementSibling);//li.banana
+    
+    const{previousElementSibling} = nextElementSibling;
+    console.log(previousElementSibling) //li.apple
+</script>
+```
 
 ## 39.4 노드 정보 취득
 |프로퍼티|설명|
