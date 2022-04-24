@@ -45,7 +45,7 @@ console.log(size); //3
 ```
 
 ### 37.1.3 요소 추가
-- Set 객체에 요소를 추가할 때는 Set.prototype.add 메서드를 사용한다.
+- Set 객체에 요소를 추가할 때는 `Set.prototype.add` 메서드를 사용한다.
 
 ```jsx
 const set = new Set();
@@ -118,7 +118,7 @@ set.delete(2).delete(3);//Uncaught TypeError
 ```
 
 ### 37.1.6 요소 일괄 삭제
-- Set 객체의 모든 요소를 일괄 삭제하려면 Set.prototype.clear 메서드를 사용.
+- Set 객체의 모든 요소를 일괄 삭제하려면 `Set.prototype.clear` 메서드를 사용.
 ```jsx
 const set = new Set([1,2,3]);
 
