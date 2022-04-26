@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+<script>
+const foo = () => {
+    throw Error('foo에서 발생한 애러'); //에러를 throw 한다.
+};
+
+const bar = () => {
+    foo(); //foo 함수 호출
+}
+
+const baz = () => {
+    bar(); //bar 함수 호출
+}
+
+try{
+    baz(); //baz 함수를 호출
+} catch (err){
+    console.log(err);
+}
+</script>
+</body>
+
+</html>
